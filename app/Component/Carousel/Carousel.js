@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useRef, useState } from "react";
+import Link from "next/link";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -49,21 +50,21 @@ export default function App() {
         modules={[EffectCoverflow, Pagination, Navigation, Autoplay]}
       >
         <SwiperSlide>
-          <a href="https://meetjohnny.com" target="_blank">
+          <Link href="https://meetjohnny.com" target="_blank">
             <Image src={meetjohnny} alt="showcase_meetjohnny" />
-          </a>
+          </Link>
         </SwiperSlide>
 
         <SwiperSlide>
-          <a href="https://sinceresthetic.co/" target="_blank">
+          <Link href="https://sinceresthetic.co/" target="_blank">
             <Image src={sinceresthetic} alt="showcase_sinceresthetic" />
-          </a>
+          </Link>
         </SwiperSlide>
 
         <SwiperSlide>
-          <a href="https://bitanan-demo.vercel.app/" target="_blank">
+          <Link href="https://bitanan-demo.vercel.app/" target="_blank">
             <Image src={bitanan} alt="showcase_bitanan" />
-          </a>
+          </Link>
         </SwiperSlide>
       </Swiper>
     </>
