@@ -16,7 +16,9 @@
         "Shadcn",
         "Mongodb",
         "MySQL",
-        "Postgres"
+        "Postgres",
+        "Docker",
+        "Kubernetes"
     ],
     "favorite-food": "Sushi",
     "favorite-animal": [
@@ -39,31 +41,263 @@
             "answer": ""
         },
         {
-            "question": "",
+            "question": "Tell me about yourself.",
             "answer": ""
         },
         {
-            "question": "",
+            "question": "How would you describe yourself?",
             "answer": ""
         },
         {
-            "question": "",
+            "question": "What makes you unique?",
             "answer": ""
         },
         {
-            "question": "",
+            "question": "Why do you want to work here?",
             "answer": ""
         },
         {
-            "question": "",
+            "question": "What interests you about this role?",
             "answer": ""
         },
         {
-            "question": "",
+            "question": "What motivates you?",
             "answer": ""
         },
         {
-            "question": "",
+            "question": "What are you passionate about?",
+            "answer": ""
+        },
+        {
+            "question": "What are your greatest strengths?",
+            "answer": ""
+        },
+        {
+            "question": "What are your greatest weaknesses?",
+            "answer": ""
+        },
+        {
+            "question": "What are your goals for the future?",
+            "answer": ""
+        },
+        {
+            "question": "Where do you see yourself in five years?",
+            "answer": ""
+        },
+        {
+            "question": "Can you tell me about a difficult work situation and how you overcame it?",
+            "answer": ""
+        },
+        {
+            "question": "What is your salary range expectation?",
+            "answer": ""
+        },
+        {
+            "question": "Why should we hire you?",
+            "answer": ""
+        },
+        {
+            "question": "Do you have any questions?",
+            "answer": ""
+        },
+        {
+            "question": "Describe a time when you had to learn a new technology quickly.",
+            "answer": ""
+        },
+        {
+            "question": "How do you handle tight deadlines and pressure?",
+            "answer": ""
+        },
+        {
+            "question": "Tell me about a time you disagreed with a teammate or manager.",
+            "answer": ""
+        },
+        {
+            "question": "How do you stay updated with the latest technologies?",
+            "answer": ""
+        },
+        {
+            "question": "Describe your experience with agile development methodologies.",
+            "answer": ""
+        },
+        {
+            "question": "How do you approach debugging a complex issue?",
+            "answer": ""
+        },
+        {
+            "question": "Tell me about a project you're most proud of.",
+            "answer": ""
+        },
+        {
+            "question": "How do you handle code reviews and feedback?",
+            "answer": ""
+        },
+        {
+            "question": "Describe a time when you had to optimize application performance.",
+            "answer": ""
+        },
+        {
+            "question": "How do you ensure your code is maintainable and scalable?",
+            "answer": ""
+        },
+        {
+            "question": "Tell me about a time you made a mistake and how you handled it.",
+            "answer": ""
+        },
+        {
+            "question": "How do you prioritize tasks when you have multiple deadlines?",
+            "answer": ""
+        },
+        {
+            "question": "Describe your experience with version control and collaboration.",
+            "answer": ""
+        },
+        {
+            "question": "How do you approach testing your code?",
+            "answer": ""
+        },
+        {
+            "question": "Tell me about a time you had to work with a difficult stakeholder.",
+            "answer": ""
+        },
+        {
+            "question": "How do you handle technical debt in your projects?",
+            "answer": ""
+        },
+        {
+            "question": "Describe a situation where you had to make a trade-off between perfection and delivery.",
+            "answer": ""
+        },
+        {
+            "question": "How do you approach learning from failure?",
+            "answer": ""
+        },
+        {
+            "question": "Tell me about a time you helped a teammate or mentored someone.",
+            "answer": ""
+        },
+        {
+            "question": "How do you handle ambiguous requirements?",
+            "answer": ""
+        },
+        {
+            "question": "Describe your experience with microservices architecture.",
+            "answer": ""
+        },
+        {
+            "question": "How do you ensure security best practices in your code?",
+            "answer": ""
+        },
+        {
+            "question": "Tell me about a time you had to refactor legacy code.",
+            "answer": ""
+        },
+        {
+            "question": "How do you approach API design and documentation?",
+            "answer": ""
+        },
+        {
+            "question": "Describe a challenging technical decision you had to make.",
+            "answer": ""
+        },
+        {
+            "question": "How do you handle database design and optimization?",
+            "answer": ""
+        },
+        {
+            "question": "Tell me about your experience with cloud platforms (AWS, GCP, Azure).",
+            "answer": ""
+        },
+        {
+            "question": "How do you approach monitoring and logging in your applications?",
+            "answer": ""
+        },
+        {
+            "question": "Describe a time when you had to work on a project outside your comfort zone.",
+            "answer": ""
+        },
+        {
+            "question": "How do you balance technical excellence with business requirements?",
+            "answer": ""
+        },
+        {
+            "question": "Tell me about your experience with CI/CD pipelines.",
+            "answer": ""
+        },
+        {
+            "question": "How do you approach cross-browser compatibility and responsive design?",
+            "answer": ""
+        },
+        {
+            "question": "Describe a time you had to convince others to adopt a new technology or approach.",
+            "answer": ""
+        },
+        {
+            "question": "How do you handle working in a fast-paced, changing environment?",
+            "answer": ""
+        },
+        {
+            "question": "Tell me about your experience with data structures and algorithms.",
+            "answer": ""
+        },
+        {
+            "question": "How do you approach accessibility in web development?",
+            "answer": ""
+        },
+        {
+            "question": "Describe a time when you had to work with incomplete or changing requirements.",
+            "answer": ""
+        },
+        {
+            "question": "How do you measure the success of your code or projects?",
+            "answer": ""
+        },
+        {
+            "question": "Tell me about a time you had to debug a production issue.",
+            "answer": ""
+        },
+        {
+            "question": "How do you stay productive while working remotely?",
+            "answer": ""
+        },
+        {
+            "question": "Describe your approach to documentation and knowledge sharing.",
+            "answer": ""
+        },
+        {
+            "question": "How do you handle competing priorities from different stakeholders?",
+            "answer": ""
+        },
+        {
+            "question": "Tell me about a time you improved a process or workflow.",
+            "answer": ""
+        },
+        {
+            "question": "How do you approach state management in React applications?",
+            "answer": ""
+        },
+        {
+            "question": "Describe your experience with containerization and Docker.",
+            "answer": ""
+        },
+        {
+            "question": "How do you handle error handling and user experience?",
+            "answer": ""
+        },
+        {
+            "question": "Tell me about a time you had to learn from a more senior developer.",
+            "answer": ""
+        },
+        {
+            "question": "How do you approach performance optimization in web applications?",
+            "answer": ""
+        },
+        {
+            "question": "Describe a situation where you had to balance multiple competing solutions.",
+            "answer": ""
+        },
+        {
+            "question": "How do you ensure your applications are scalable and performant?",
             "answer": ""
         }
     ]
