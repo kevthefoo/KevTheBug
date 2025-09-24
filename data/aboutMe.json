@@ -1,0 +1,70 @@
+{
+    "full-name": "Cheng-Chun Hsu",
+    "english name": "Kevin",
+    "sex": "male",
+    "nationality": "Taiwan",
+    "mbti": "INTP",
+    "skill-sets": [
+        "Javascript",
+        "React.js",
+        "Nextjs",
+        "AWS",
+        "Tailwindcss",
+        "Docker",
+        "Git",
+        "Python",
+        "Shadcn",
+        "Mongodb",
+        "MySQL",
+        "Postgres"
+    ],
+    "favorite-food": "Sushi",
+    "favorite-animal": [
+        "Dalmatian",
+        "German Shepherd"
+    ],
+    "introduction": "",
+    "experience": "2 years front-end developer",
+    "q&a": [
+        {
+            "question": "How do you ensure code quality when working in a team?",
+            "answer": ""
+        },
+        {
+            "question": "How do you ensure code quality when working in a team?",
+            "answer": ""
+        },
+        {
+            "question": "Tell me about a challenging bug you fixed and how you approached it.",
+            "answer": ""
+        },
+        {
+            "question": "",
+            "answer": ""
+        },
+        {
+            "question": "",
+            "answer": ""
+        },
+        {
+            "question": "",
+            "answer": ""
+        },
+        {
+            "question": "",
+            "answer": ""
+        },
+        {
+            "question": "",
+            "answer": ""
+        },
+        {
+            "question": "",
+            "answer": ""
+        },
+        {
+            "question": "",
+            "answer": ""
+        }
+    ]
+}
