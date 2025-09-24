@@ -1,54 +1,35 @@
-"use client"
+"use client";
 
 import React, { useState } from "react";
 
 export default function Page() {
-  const [messages, setMessages] = useState([
-    { sender: "bot", text: "Hello! How can I help you today?" },
-  ]);
+  const [message, setMessage] = useState("Ask me anything!");
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleSend = async (e) => {
     e.preventDefault();
-    if (!input.trim()) return;
-    const userMsg = { sender: "user", text: input };
-    setMessages((msgs) => [...msgs, userMsg]);
     setLoading(true);
-
-    // Placeholder for chatbot API call
-    setTimeout(() => {
-      setMessages((msgs) => [
-        ...msgs,
-        { sender: "bot", text: `You said: ${input}` },
-      ]);
-      setLoading(false);
-    }, 800);
-
+    const response = await fetch(`/api/kevingpt`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ userQuestion: input }),
+    });
+    const data = await response.json();
+    const answer = data.answer;
+    setMessage(answer);
+    setLoading(false);
     setInput("");
   };
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-gray-100 p-4">
       <div className="flex w-full max-w-md flex-col rounded-lg bg-white p-6 shadow-lg">
-        <h2 className="mb-4 text-center text-2xl font-bold">Chatbot</h2>
+        <h2 className="mb-4 text-center text-2xl font-bold">KevinGPT</h2>
         <div className="mb-4 max-h-64 flex-1 space-y-2 overflow-y-auto">
-          {messages.map((msg, idx) => (
-            <div
-              key={idx}
-              className={`flex ${msg.sender === "user" ? "justify-end" : "justify-start"}`}
-            >
-              <span
-                className={`max-w-xs break-words rounded-lg px-4 py-2 text-sm "${
-                  msg.sender === "user"
-                    ? "bg-blue-500 text-white"
-                    : "bg-gray-200 text-gray-800"
-                }"`}
-              >
-                {msg.text}
-              </span>
-            </div>
-          ))}
+          {message}
           {loading && (
             <div className="flex justify-start">
               <span className="animate-pulse rounded-lg bg-gray-200 px-4 py-2 text-sm text-gray-800">
