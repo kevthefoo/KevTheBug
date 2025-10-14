@@ -7,7 +7,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 import meetjohnny from "@/asset/materials/showcase/meetjohnny.png";
 import bitanan from "@/asset/materials/showcase/bitanan.png";
-import sinceresthetic from "@/asset/materials/showcase/sinceresthetic.png";
+import ferrolink from "@/asset/materials/showcase/ferrolink.png";
 
 // Import Swiper styles
 import "swiper/css";
@@ -56,8 +56,8 @@ export default function App() {
         </SwiperSlide>
 
         <SwiperSlide>
-          <Link href="https://sinceresthetic.co/" target="_blank">
-            <Image src={sinceresthetic} alt="showcase_sinceresthetic" />
+          <Link href="https://ferrolink.io/" target="_blank">
+            <Image src={ferrolink} alt="showcase_ferrolink" />
           </Link>
         </SwiperSlide>
 
