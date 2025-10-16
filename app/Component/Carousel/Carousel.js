@@ -6,8 +6,8 @@ import Link from "next/link";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import meetjohnny from "@/asset/materials/showcase/meetjohnny.png";
-import bitanan from "@/asset/materials/showcase/bitanan.png";
 import ferrolink from "@/asset/materials/showcase/ferrolink.png";
+import vocablake from "@/asset/materials/showcase/vocablake.png";
 
 // Import Swiper styles
 import "swiper/css";
@@ -62,8 +62,8 @@ export default function App() {
         </SwiperSlide>
 
         <SwiperSlide>
-          <Link href="https://bitanan-demo.vercel.app/" target="_blank">
-            <Image src={bitanan} alt="showcase_bitanan" />
+          <Link href="https://www.vocablake.com/" target="_blank">
+            <Image src={vocablake} alt="showcase_vocablake" />
           </Link>
         </SwiperSlide>
       </Swiper>
