@@ -8,6 +8,8 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import meetjohnny from "@/asset/materials/showcase/meetjohnny.png";
 import ferrolink from "@/asset/materials/showcase/ferrolink.png";
 import vocablake from "@/asset/materials/showcase/vocablake.png";
+import cuthatcrap from "@/asset/materials/showcase/cuthatcrap.png";
+import yamata from "@/asset/materials/showcase/yamata.png";
 
 // Import Swiper styles
 import "swiper/css";
@@ -62,8 +64,20 @@ export default function App() {
         </SwiperSlide>
 
         <SwiperSlide>
+          <Link href="https://www.cuthatcrap.com/" target="_blank">
+            <Image src={cuthatcrap} alt="showcase_cuthatcrap" />
+          </Link>
+        </SwiperSlide>
+
+        <SwiperSlide>
           <Link href="https://www.vocablake.com/" target="_blank">
             <Image src={vocablake} alt="showcase_vocablake" />
+          </Link>
+        </SwiperSlide>
+
+        <SwiperSlide>
+          <Link href="https://www.yamata-lab.com/" target="_blank">
+            <Image src={yamata} alt="showcase_yamata-lab" />
           </Link>
         </SwiperSlide>
       </Swiper>
