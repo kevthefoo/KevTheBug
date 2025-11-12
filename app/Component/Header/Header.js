@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import { FaLinkedin, FaGithubSquare, FaMedium } from "react-icons/fa";
+import { FaLinkedin, FaGithubSquare } from "react-icons/fa";
 import ThemeToggle from "@/app/Component/ThemeToggle/ThemeToggle";
 import Image from "next/image";
 import logo from "@/asset/materials/logo/logo.png";
@@ -64,7 +64,11 @@ export default function Header() {
       >
         <ul className="flex items-center justify-between gap-2 text-2xl max-md:order-1">
           <li>
-            <a href="https://github.com/kevthefoo" target="_blank" title="Github">
+            <a
+              href="https://github.com/kevthefoo"
+              target="_blank"
+              title="Github"
+            >
               <FaGithubSquare />
             </a>
           </li>
@@ -75,15 +79,6 @@ export default function Header() {
               title="Linkedin"
             >
               <FaLinkedin />
-            </a>
-          </li>
-          <li>
-            <a
-              href="https://medium.com/@kevthefoo"
-              target="_blank"
-              title="Medium"
-            >
-              <FaMedium />
             </a>
           </li>
         </ul>

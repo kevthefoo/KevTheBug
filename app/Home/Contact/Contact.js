@@ -1,93 +1,86 @@
 import { MdEmail } from "react-icons/md";
-
-import { FaLinkedin } from "react-icons/fa";
-import { FaLocationDot } from "react-icons/fa6";
+import { FaLinkedin, FaGithub } from "react-icons/fa";
 
 import "./contact.css";
 
-export default function Conatct() {
+export default function Contact() {
   return (
-    <section id="contact" className="h-auto flex-col justify-start pb-24 pt-16">
-      <h1>Contact</h1>
+    <section
+      id="contact"
+      className="min-f-screen flex-col justify-start pb-16 pt-16"
+    >
+      <div className="mx-auto max-w-4xl">
+        {/* Header */}
+        <div className="mb-16 text-center">
+          <h1>Contact</h1>
+          <span className="mb-12 text-xl text-gray-500">
+            Get more infomration about me
+          </span>
+        </div>
 
-      <span className="mb-12 text-xl text-gray-500">Get in touch with me</span>
-
-      <div className="flex h-full w-full items-stretch justify-center gap-10 max-sm:flex-col">
-        <div className="flex flex-col items-stretch justify-between gap-4 max-sm:flex-row max-sm:justify-center max-sm:gap-2">
+        {/* Contact Cards */}
+        <div className="grid gap-8 md:grid-cols-3">
+          {/* Email Card */}
           <a
             href="mailto:kevthebug@gmail.com"
-            className="flex aspect-square flex-1 flex-col items-center justify-center rounded-3xl border-2 border-gray-400 bg-slate-200 px-8 py-4 max-md:p-0 dark:bg-slate-800 dark:hover:bg-slate-700"
+            className="hover:shadow-3xl group relative overflow-hidden rounded-3xl bg-white p-8 shadow-2xl transition-all duration-300 hover:-translate-y-2 dark:bg-slate-800"
           >
-            <MdEmail className="mb-2 text-3xl max-md:text-xl" />
-            <h3 className="text-xl max-[992px]:text-[12px]">Email</h3>
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-blue-600/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
+            <div className="relative z-10">
+              <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500 to-blue-600 text-white shadow-lg">
+                <MdEmail className="text-2xl" />
+              </div>
+              <h3 className="mb-3 text-2xl font-bold text-gray-800 dark:text-white">
+                Email
+              </h3>
+              <p className="mb-4 text-gray-600 dark:text-gray-300">
+                Send me a letter
+              </p>
+            </div>
           </a>
+
+          {/* LinkedIn Card */}
           <a
             href="https://www.linkedin.com/in/kevthebug/"
             target="_blank"
-            className="flex aspect-square flex-1 flex-col items-center justify-center rounded-3xl border-2 border-gray-400 bg-slate-200 px-8 py-4 max-md:p-0 dark:bg-slate-800 dark:hover:bg-slate-700"
+            rel="noopener noreferrer"
+            className="hover:shadow-3xl group relative overflow-hidden rounded-3xl bg-white p-8 shadow-2xl transition-all duration-300 hover:-translate-y-2 dark:bg-slate-800"
           >
-            <FaLinkedin className="mb-2 text-3xl max-md:text-xl" />
-            <h3 className="text-xl max-[992px]:text-[12px]">LinkedIn</h3>
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 to-indigo-600/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
+            <div className="relative z-10">
+              <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-600 text-white shadow-lg">
+                <FaLinkedin className="text-2xl" />
+              </div>
+              <h3 className="mb-3 text-2xl font-bold text-gray-800 dark:text-white">
+                LinkedIn
+              </h3>
+              <p className="mb-4 text-gray-600 dark:text-gray-300">
+                Text me directly
+              </p>
+            </div>
           </a>
+
+          {/* GitHub Card */}
           <a
-            href="https://maps.app.goo.gl/srk7XxEz989FP3Ws8"
+            href="https://github.com/kevthefoo"
             target="_blank"
-            className="flex aspect-square flex-1 flex-col items-center justify-center rounded-3xl border-2 border-gray-400 bg-slate-200 px-8 py-4 max-md:p-0 dark:bg-slate-800 dark:hover:bg-slate-700"
+            rel="noopener noreferrer"
+            className="hover:shadow-3xl group relative overflow-hidden rounded-3xl bg-white p-8 shadow-2xl transition-all duration-300 hover:-translate-y-2 dark:bg-slate-800"
           >
-            <FaLocationDot className="mb-2 text-3xl max-md:text-xl" />
-            <h3 className="text-xl max-[992px]:text-[12px]">Location</h3>
+            <div className="absolute inset-0 bg-gradient-to-br from-gray-500/10 to-gray-600/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
+            <div className="relative z-10">
+              <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-gray-700 to-gray-800 text-white shadow-lg">
+                <FaGithub className="text-2xl" />
+              </div>
+              <h3 className="mb-3 text-2xl font-bold text-gray-800 dark:text-white">
+                GitHub
+              </h3>
+              <p className="mb-4 text-gray-600 dark:text-gray-300">
+                Check out my projects
+              </p>
+            </div>
           </a>
         </div>
-
-        <form action="" className="rounded-3xl border-2 border-gray-400 p-8">
-          <div className="mb-8 flex flex-col items-start justify-start">
-            <label htmlFor="name" className="mb-2">
-              Name:
-            </label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              className="w-full rounded border-2 p-2 text-black"
-              required
-            />
-          </div>
-
-          <div className="mb-8 flex flex-col items-start justify-start">
-            <label htmlFor="email" className="mb-2">
-              Email:
-            </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              className="w-full rounded border-2 p-2 text-black"
-              required
-            />
-          </div>
-
-          <div className="mb-8 flex flex-col items-start justify-start">
-            <label htmlFor="message" className="mb-2">
-              Message:
-            </label>
-            <textarea
-              id="message"
-              name="message"
-              rows="6"
-              className="form_messaage w-full rounded border-2 p-2 text-black"
-              required
-            ></textarea>
-          </div>
-
-          <div className="flex justify-center">
-            <button
-              type="submit"
-              className="self-center rounded-2xl bg-gray-700 px-8 py-4 font-bold text-white hover:bg-gray-900 dark:bg-blue-700 dark:text-black dark:hover:bg-blue-600"
-            >
-              Submit
-            </button>
-          </div>
-        </form>
       </div>
     </section>
   );
