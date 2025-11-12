@@ -8,14 +8,14 @@ import Reveal from "@/app/Component/Reveal/Reveal";
 
 export default function Hero() {
   return (
-    <section className="min-h-screen items-center justify-evenly pt-20 max-md:pt-[30%] max-md:flex-col max-md:justify-start max-md:gap-8 max-md:text-center">
+    <section className="min-h-screen items-center justify-evenly pt-20 max-md:flex-col max-md:justify-start max-md:gap-8 max-md:pt-[30%] max-md:text-center">
       <div className="php_image_container relative h-[500px] w-[300px] max-[992px]:h-[400px] max-[992px]:w-[250px] max-md:h-[300px] max-md:w-[300px] max-md:rounded-full max-[496px]:h-[200px] max-[496px]:w-[200px]">
         <Image
           priority={true}
           loading="eager"
           placeholder="empty"
           src={pfp_bright}
-          alt="Kevin Caviar"
+          alt="Kevin Foo"
           className="pfp_image_light absolute h-full w-full rounded-3xl object-cover max-md:rounded-full"
         />
         <Image
@@ -23,7 +23,7 @@ export default function Hero() {
           loading="eager"
           placeholder="empty"
           src={pfp_dark}
-          alt="Kevin Caviar"
+          alt="Kevin Foo"
           className="pfp_image_dark invisible absolute h-full w-full rounded-3xl object-cover opacity-0 max-md:rounded-full"
         />
       </div>
@@ -31,7 +31,7 @@ export default function Hero() {
       <div className="flex w-1/2 flex-col max-[992px]:text-[14px] max-md:h-auto max-md:w-full max-md:items-center">
         <Reveal className="border-2 border-blue-300">
           <h1 className="mb-4 flex items-center gap-x-3.5 max-[992px]:text-xl max-md:justify-center">
-            Kevin Caviar
+            Kevin Foo
             <HelloIcon />
           </h1>
         </Reveal>
@@ -54,7 +54,7 @@ export default function Hero() {
         <Reveal delayTime={1.25}>
           <Link
             href="/#about"
-            className="rounded-2xl self-center bg-gray-700 px-8 py-4 font-bold text-white hover:bg-gray-900 max-[992px]:rounded-xl max-[992px]:px-4 max-[992px]:py-2 max-[992px]:text-[12px] dark:bg-blue-700 dark:text-black dark:hover:bg-blue-600"
+            className="self-center rounded-2xl bg-gray-700 px-8 py-4 font-bold text-white hover:bg-gray-900 max-[992px]:rounded-xl max-[992px]:px-4 max-[992px]:py-2 max-[992px]:text-[12px] dark:bg-blue-700 dark:text-black dark:hover:bg-blue-600"
           >
             Learn More
           </Link>

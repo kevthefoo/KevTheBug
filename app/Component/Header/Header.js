@@ -23,16 +23,7 @@ export default function Header() {
   return (
     <header className="fixed z-50 flex h-16 w-full items-center justify-around border-b-2 bg-white transition duration-700 ease-linear max-md:justify-start dark:bg-neutral-900 dark:text-white">
       <div className="flex h-full items-center justify-center gap-2 max-md:ml-5">
-        <Image
-          src={logo}
-          alt="logo"
-          width={50}
-          height={50}
-          className="rounded-full"
-        />
-        <p className="select-none text-[26px] max-[992px]:text-xl">
-          Kevin Caviar
-        </p>
+        <p className="select-none text-[26px] max-[992px]:text-xl">Kevin Foo</p>
       </div>
       <nav className="max-[992px]:text-sm max-md:hidden">
         <ul className="flex items-center justify-between gap-4 max-[992px]:gap-[12px]">
