@@ -1,52 +1,26 @@
 .bubble {
   @apply absolute flex h-28 w-28 cursor-pointer items-center justify-center rounded-full border-4 border-black bg-blue-300 text-center font-semibold max-[992px]:text-[14px] max-md:h-20 max-md:w-20 dark:border-white dark:text-black;
-  transform: translate(-50%, -50%);
+  /* transform: translate(0%, -50%); */
 }
 
 .bubble:hover {
   box-shadow: 0 5px 15px 0px rgba(0, 0, 0, 0.6);
-  transform: translate(-50%, -50%);
+  /* transform: translate(0%, -50%); */
   animation: float 2s ease-out infinite;
-}
-
-@keyframes wiggle {
-  0%,
-  7% {
-    transform: rotateZ(0);
-  }
-  15% {
-    transform: rotateZ(-15deg);
-  }
-  20% {
-    transform: rotateZ(10deg);
-  }
-  25% {
-    transform: rotateZ(-10deg);
-  }
-  30% {
-    transform: rotateZ(6deg);
-  }
-  35% {
-    transform: rotateZ(-4deg);
-  }
-  40%,
-  100% {
-    transform: rotateZ(0);
-  }
 }
 
 @keyframes float {
   0% {
     box-shadow: 0 5px 15px 0px rgba(0, 0, 0, 0.6);
-    transform: translate(-50%, -50%);
+    transform: translate(0%, 0%);
   }
   50% {
     box-shadow: 0 25px 15px 0px rgba(0, 0, 0, 0.2);
-    transform: translate(-50%, -75%);
+    transform: translate(0%, 0%);
   }
   100% {
     box-shadow: 0 5px 15px 0px rgba(0, 0, 0, 0.6);
-    transform: translate(-50%, -50%);
+    transform: translate(0%, 0%);
   }
 }
 
