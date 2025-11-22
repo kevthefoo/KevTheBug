@@ -7,7 +7,7 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="min-f-screen flex-col justify-start pb-16 pt-16"
+      className="min-f-screen flex-col justify-start pb-16 pt-16 dark:bg-neutral-800"
     >
       <div className="mx-auto max-w-4xl">
         {/* Header */}

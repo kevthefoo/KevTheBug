@@ -1,4 +1,4 @@
-export default function HelloIcon() {
+export default function MonkeyIcon() {
   return (
     <>
       <svg

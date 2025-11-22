@@ -1,14 +1,14 @@
 import Image from "next/image";
 import pfp_bright from "@/asset/materials/pfp/pfp_bright.png";
 import pfp_dark from "@/asset/materials/pfp/pfp_dark.png";
-import HelloIcon from "./HelloIcon";
+import MonkeyIcon from "./MonkeyIcon";
 import "./hero.css";
 import Link from "next/link";
 import Reveal from "@/app/Component/Reveal/Reveal";
 
 export default function Hero() {
   return (
-    <section className="min-h-screen items-center justify-evenly pt-20 max-md:flex-col max-md:justify-start max-md:gap-8 max-md:pt-[30%] max-md:text-center">
+    <section className="min-h-screen items-center justify-evenly pt-20 max-md:flex-col max-md:justify-start max-md:gap-8 max-md:pt-[30%] max-md:text-center dark:bg-neutral-800">
       <div className="php_image_container relative h-[500px] w-[300px] max-[992px]:h-[400px] max-[992px]:w-[250px] max-md:h-[300px] max-md:w-[300px] max-md:rounded-full max-[496px]:h-[200px] max-[496px]:w-[200px]">
         <Image
           priority={true}
@@ -32,7 +32,7 @@ export default function Hero() {
         <Reveal className="border-2 border-blue-300">
           <h1 className="mb-4 flex items-center gap-x-3.5 max-[992px]:text-xl max-md:justify-center">
             Kevin Foo
-            <HelloIcon />
+            <MonkeyIcon />
           </h1>
         </Reveal>
 

@@ -5,7 +5,10 @@ import Reveal from "@/app/Component/Reveal/Reveal";
 
 export default function Skills() {
   return (
-    <section id="skills" className="min-h-screen flex-col justify-start pt-16">
+    <section
+      id="skills"
+      className="min-h-screen flex-col justify-start pt-16 dark:bg-neutral-800"
+    >
       <h1>Skills</h1>
       <span className="mb-12 text-xl text-gray-500">What I got in my bag</span>
       <Reveal yTranslate={300}>
@@ -38,6 +41,10 @@ export default function Skills() {
                   <HiAcademicCap />
                   Shadcn/ui
                 </li>
+                <li className="flex items-center justify-start gap-1">
+                  <HiAcademicCap />
+                  Figma
+                </li>
               </ul>
             </div>
           </div>
@@ -64,7 +71,7 @@ export default function Skills() {
                 </li>
                 <li className="flex items-center justify-start gap-1">
                   <HiAcademicCap />
-                  MySQL
+                  PostgreSQL
                 </li>
                 <li className="flex items-center justify-start gap-1">
                   <HiAcademicCap />
@@ -76,7 +83,7 @@ export default function Skills() {
                 </li>
                 <li className="flex items-center justify-start gap-1">
                   <HiAcademicCap />
-                  Fastapi
+                  Supabase
                 </li>
               </ul>
             </div>
@@ -107,16 +114,20 @@ export default function Skills() {
           </div>
 
           <div className="flex flex-col rounded-xl border-2 border-gray-400 bg-slate-200 p-4 dark:bg-slate-800">
-            <h3 className="mb-4 self-center text-xl">Others</h3>
+            <h3 className="mb-4 self-center text-xl">AI</h3>
             <div>
               <ul className="grid grid-flow-col grid-cols-2 grid-rows-4 items-center justify-center gap-4">
                 <li className="flex items-center justify-start gap-1">
                   <HiAcademicCap />
-                  Linux Command
+                  N8N
                 </li>
                 <li className="flex items-center justify-start gap-1">
                   <HiAcademicCap />
-                  Figma
+                  Rag
+                </li>
+                <li className="flex items-center justify-start gap-1">
+                  <HiAcademicCap />
+                  MCP
                 </li>
               </ul>
             </div>
