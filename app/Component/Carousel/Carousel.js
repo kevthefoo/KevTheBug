@@ -10,6 +10,7 @@ import ferrolink from "@/asset/materials/showcase/ferrolink.png";
 import vocablake from "@/asset/materials/showcase/vocablake.png";
 import cuthatcrap from "@/asset/materials/showcase/cuthatcrap.png";
 import yamata from "@/asset/materials/showcase/yamata.png";
+import wackywizarduni from "@/asset/materials/showcase/wackywizarduni.png";
 
 // Import Swiper styles
 import "swiper/css";
@@ -54,6 +55,12 @@ export default function App() {
         <SwiperSlide>
           <Link href="https://meetjohnny.com" target="_blank">
             <Image src={meetjohnny} alt="showcase_meetjohnny" />
+          </Link>
+        </SwiperSlide>
+
+        <SwiperSlide>
+          <Link href="https://www.wackywizarduni.com/" target="_blank">
+            <Image src={wackywizarduni} alt="showcase_wackywizarduni" />
           </Link>
         </SwiperSlide>
 
