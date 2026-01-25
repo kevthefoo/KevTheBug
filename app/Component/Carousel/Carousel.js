@@ -54,7 +54,11 @@ export default function App() {
       >
         <SwiperSlide>
           <Link href="https://meetjohnny.com" target="_blank">
-            <Image src={meetjohnny} alt="showcase_meetjohnny" />
+            <Image
+              src={meetjohnny}
+              alt="showcase_meetjohnny"
+              className="object-cover object-left"
+            />
           </Link>
         </SwiperSlide>
 
