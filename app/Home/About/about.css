@@ -1,80 +1,156 @@
 .bubble {
   @apply absolute flex h-28 w-28 cursor-pointer items-center justify-center rounded-full border-4 border-black bg-blue-300 text-center font-semibold max-[992px]:text-[14px] max-md:h-20 max-md:w-20 dark:border-white dark:text-black;
   transform: translate(-50%, -50%);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .bubble:hover {
-  box-shadow: 0 5px 15px 0px rgba(0, 0, 0, 0.6);
-  transform: translate(-50%, -50%);
+  box-shadow:
+    0 5px 15px 0px rgba(0, 0, 0, 0.3),
+    0 0 30px rgba(59, 130, 246, 0.4);
+  transform: translate(-50%, -55%);
   animation: floating 2s ease-out infinite;
 }
 
 @keyframes floating {
   0% {
-    box-shadow: 0 5px 15px 0px rgba(0, 0, 0, 0.6);
-    transform: translate(-50%, -50%);
+    box-shadow:
+      0 5px 15px 0px rgba(0, 0, 0, 0.3),
+      0 0 30px rgba(59, 130, 246, 0.4);
+    transform: translate(-50%, -55%);
   }
   50% {
-    box-shadow: 0 25px 15px 0px rgba(0, 0, 0, 0.2);
-    transform: translate(-50%, -60%);
+    box-shadow:
+      0 25px 15px 0px rgba(0, 0, 0, 0.15),
+      0 0 40px rgba(59, 130, 246, 0.5);
+    transform: translate(-50%, -65%);
   }
   100% {
-    box-shadow: 0 5px 15px 0px rgba(0, 0, 0, 0.6);
-    transform: translate(-50%, -50%);
+    box-shadow:
+      0 5px 15px 0px rgba(0, 0, 0, 0.3),
+      0 0 30px rgba(59, 130, 246, 0.4);
+    transform: translate(-50%, -55%);
   }
 }
 
+/* Main bubble - larger and distinct */
 .bubble.main {
+  @apply h-36 w-36 bg-gradient-to-br from-blue-400 to-purple-400 text-lg font-bold max-md:h-24 max-md:w-24;
   top: 40%;
   left: 50%;
+  border-color: transparent;
+  box-shadow: 0 4px 20px rgba(59, 130, 246, 0.3);
 }
 
-/* ===== */
+.bubble.main:hover {
+  box-shadow:
+    0 8px 25px rgba(59, 130, 246, 0.4),
+    0 0 40px rgba(139, 92, 246, 0.5);
+}
 
+/* Personality bubbles - warm colors */
 .mbti {
+  @apply bg-gradient-to-br from-amber-300 to-orange-300;
   top: 10%;
   left: 50%;
+  border-color: transparent;
+}
+
+.mbti:hover {
+  box-shadow:
+    0 5px 15px 0px rgba(0, 0, 0, 0.3),
+    0 0 30px rgba(251, 191, 36, 0.5);
 }
 
 .trait {
+  @apply bg-gradient-to-br from-rose-300 to-pink-300;
   top: 70%;
   left: 50%;
+  border-color: transparent;
 }
 
-/* ===== */
+.trait:hover {
+  box-shadow:
+    0 5px 15px 0px rgba(0, 0, 0, 0.3),
+    0 0 30px rgba(251, 113, 133, 0.5);
+}
 
+/* Interest bubbles - cool colors */
 .food {
+  @apply bg-gradient-to-br from-green-300 to-emerald-300;
   top: 40%;
   left: 25%;
+  border-color: transparent;
+}
+
+.food:hover {
+  box-shadow:
+    0 5px 15px 0px rgba(0, 0, 0, 0.3),
+    0 0 30px rgba(52, 211, 153, 0.5);
 }
 
 .music {
+  @apply bg-gradient-to-br from-violet-300 to-purple-300;
   top: 40%;
   left: 75%;
+  border-color: transparent;
 }
 
-/* ===== */
+.music:hover {
+  box-shadow:
+    0 5px 15px 0px rgba(0, 0, 0, 0.3),
+    0 0 30px rgba(167, 139, 250, 0.5);
+}
 
+/* Hobby bubbles - mixed colors */
 .pet {
+  @apply bg-gradient-to-br from-cyan-300 to-teal-300;
   top: 25%;
   left: 63%;
+  border-color: transparent;
+}
+
+.pet:hover {
+  box-shadow:
+    0 5px 15px 0px rgba(0, 0, 0, 0.3),
+    0 0 30px rgba(34, 211, 238, 0.5);
 }
 
 .sport {
+  @apply bg-gradient-to-br from-lime-300 to-green-300;
   top: 25%;
   left: 37%;
+  border-color: transparent;
 }
 
-/* ===== */
+.sport:hover {
+  box-shadow:
+    0 5px 15px 0px rgba(0, 0, 0, 0.3),
+    0 0 30px rgba(163, 230, 53, 0.5);
+}
 
 .film {
+  @apply bg-gradient-to-br from-indigo-300 to-blue-300;
   top: 55%;
   left: 63%;
+  border-color: transparent;
+}
+
+.film:hover {
+  box-shadow:
+    0 5px 15px 0px rgba(0, 0, 0, 0.3),
+    0 0 30px rgba(129, 140, 248, 0.5);
 }
 
 .company {
+  @apply bg-gradient-to-br from-fuchsia-300 to-pink-300;
   top: 55%;
   left: 37%;
+  border-color: transparent;
 }
 
-/* ===== */
+.company:hover {
+  box-shadow:
+    0 5px 15px 0px rgba(0, 0, 0, 0.3),
+    0 0 30px rgba(232, 121, 249, 0.5);
+}

@@ -7,6 +7,7 @@ import logo from "@/asset/materials/logo/logo.png";
 
 export default function Header() {
   const [active, setActive] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   const handleActive = () => {
     setActive(!active);
@@ -20,27 +21,53 @@ export default function Header() {
     }
   }, [active]);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <header className="fixed z-50 flex h-16 w-full items-center justify-around border-b-2 bg-white transition duration-700 ease-linear max-md:justify-start dark:bg-neutral-900 dark:text-white">
+    <header
+      className={`fixed z-50 flex h-16 w-full items-center justify-around border-b transition-all duration-300 ease-out max-md:justify-start ${
+        scrolled
+          ? "border-gray-200/50 bg-white/80 shadow-lg backdrop-blur-md dark:border-gray-700/50 dark:bg-neutral-900/80"
+          : "border-gray-200 bg-white/95 backdrop-blur-sm dark:border-gray-800 dark:bg-neutral-900/95"
+      } dark:text-white`}
+    >
       <div className="flex h-full items-center justify-center gap-2 max-md:ml-5">
-        <p className="select-none text-[26px] max-[992px]:text-xl">Kevin Foo</p>
+        <p className="select-none text-[26px] font-medium max-[992px]:text-xl">
+          Kevin Foo
+        </p>
       </div>
       <nav className="max-[992px]:text-sm max-md:hidden">
-        <ul className="flex items-center justify-between gap-4 max-[992px]:gap-[12px]">
-          <li className="hover:text-gray-500">
-            <a href="#about">About</a>
+        <ul className="flex items-center justify-between gap-6 max-[992px]:gap-[14px]">
+          <li>
+            <a href="#about" className="nav-link py-1 transition-colors hover:text-blue-500">
+              About
+            </a>
           </li>
-          <li className="hover:text-gray-500">
-            <a href="#skills">Skills</a>
+          <li>
+            <a href="#skills" className="nav-link py-1 transition-colors hover:text-blue-500">
+              Skills
+            </a>
           </li>
-          <li className="hover:text-gray-500">
-            <a href="#showcase">Showcase</a>
+          <li>
+            <a href="#showcase" className="nav-link py-1 transition-colors hover:text-blue-500">
+              Showcase
+            </a>
           </li>
-          <li className="hover:text-gray-500">
-            <a href="#services">Services</a>
+          <li>
+            <a href="#services" className="nav-link py-1 transition-colors hover:text-blue-500">
+              Services
+            </a>
           </li>
-          <li className="hover:text-gray-500">
-            <a href="#contact">Contact</a>
+          <li>
+            <a href="#contact" className="nav-link py-1 transition-colors hover:text-blue-500">
+              Contact
+            </a>
           </li>
         </ul>
       </nav>
@@ -53,12 +80,13 @@ export default function Header() {
             : "flex items-center justify-between gap-4 max-[992px]:gap-4 max-md:hidden"
         }
       >
-        <ul className="flex items-center justify-between gap-2 text-2xl max-md:order-1">
+        <ul className="flex items-center justify-between gap-3 text-2xl max-md:order-1">
           <li>
             <a
               href="https://github.com/kevthefoo"
               target="_blank"
               title="Github"
+              className="icon-hover inline-block"
             >
               <FaGithubSquare />
             </a>
@@ -68,6 +96,7 @@ export default function Header() {
               href="https://www.linkedin.com/in/kevthebug/"
               target="_blank"
               title="Linkedin"
+              className="icon-hover inline-block"
             >
               <FaLinkedin />
             </a>
@@ -110,8 +139,8 @@ export default function Header() {
       <div
         className={
           active
-            ? "fixed left-0 top-0 z-30 flex h-screen w-full flex-col items-center justify-start bg-white pt-[300px] transition duration-700 ease-linear dark:bg-neutral-900 dark:text-white"
-            : "fixed left-full top-0 z-30 flex h-screen w-full items-center justify-center bg-white transition duration-700 ease-linear dark:bg-neutral-900 dark:text-white"
+            ? "fixed left-0 top-0 z-30 flex h-screen w-full flex-col items-center justify-start bg-white/95 pt-[300px] backdrop-blur-md transition duration-500 ease-out dark:bg-neutral-900/95 dark:text-white"
+            : "fixed left-full top-0 z-30 flex h-screen w-full items-center justify-center bg-white/95 backdrop-blur-md transition duration-500 ease-out dark:bg-neutral-900/95 dark:text-white"
         }
       >
         <nav className={active ? "" : ""}>

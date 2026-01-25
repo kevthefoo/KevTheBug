@@ -13,128 +13,144 @@ export default function Skills() {
       <span className="mb-12 text-xl text-gray-500">What I got in my bag</span>
       <Reveal yTranslate={300}>
         <div className="mx-auto grid h-full w-4/5 grid-cols-2 justify-center gap-8 max-[992px]:w-full max-[992px]:text-[14px] max-md:grid-cols-1">
-          <div className="flex flex-col rounded-xl border-2 border-gray-400 bg-slate-200 p-4 dark:bg-slate-800">
-            <h3 className="mb-4 self-center text-xl">Frontend</h3>
+          {/* Frontend Card */}
+          <div className="card-hover category-frontend flex flex-col rounded-xl border-2 bg-gradient-to-br from-slate-50 to-blue-50 p-6 shadow-md dark:from-slate-800 dark:to-slate-900">
+            <h3 className="category-title mb-4 self-center text-xl font-semibold">
+              Frontend
+            </h3>
+            <div className="h-1 w-16 self-center rounded-full bg-gradient-to-r from-blue-400 to-blue-600 mb-4"></div>
             <div>
               <ul className="grid grid-flow-col grid-cols-2 grid-rows-4 items-center justify-center gap-4">
-                <li className="flex items-center justify-start gap-1">
-                  <HiAcademicCap />
+                <li className="skill-item flex items-center justify-start gap-2">
+                  <HiAcademicCap className="text-blue-500" />
                   JavaScript
                 </li>
-                <li className="flex items-center justify-start gap-1">
-                  <HiAcademicCap />
+                <li className="skill-item flex items-center justify-start gap-2">
+                  <HiAcademicCap className="text-blue-500" />
                   React
                 </li>
-                <li className="flex items-center justify-start gap-1">
-                  <HiAcademicCap />
+                <li className="skill-item flex items-center justify-start gap-2">
+                  <HiAcademicCap className="text-blue-500" />
                   Next.js
                 </li>
-                <li className="flex items-center justify-start gap-1">
-                  <HiAcademicCap />
+                <li className="skill-item flex items-center justify-start gap-2">
+                  <HiAcademicCap className="text-blue-500" />
                   HeroUI
                 </li>
-                <li className="flex items-center justify-start gap-1">
-                  <HiAcademicCap />
+                <li className="skill-item flex items-center justify-start gap-2">
+                  <HiAcademicCap className="text-blue-500" />
                   Tailwindcss
                 </li>
-                <li className="flex items-center justify-start gap-1">
-                  <HiAcademicCap />
+                <li className="skill-item flex items-center justify-start gap-2">
+                  <HiAcademicCap className="text-blue-500" />
                   Shadcn/ui
                 </li>
-                <li className="flex items-center justify-start gap-1">
-                  <HiAcademicCap />
+                <li className="skill-item flex items-center justify-start gap-2">
+                  <HiAcademicCap className="text-blue-500" />
                   Figma
                 </li>
               </ul>
             </div>
           </div>
 
-          <div className="flex flex-col rounded-xl border-2 border-gray-400 bg-slate-200 p-4 dark:bg-slate-800">
-            <h3 className="mb-4 self-center text-xl">Backend</h3>
+          {/* Backend Card */}
+          <div className="card-hover category-backend flex flex-col rounded-xl border-2 bg-gradient-to-br from-slate-50 to-green-50 p-6 shadow-md dark:from-slate-800 dark:to-slate-900">
+            <h3 className="category-title mb-4 self-center text-xl font-semibold">
+              Backend
+            </h3>
+            <div className="h-1 w-16 self-center rounded-full bg-gradient-to-r from-green-400 to-green-600 mb-4"></div>
             <div>
               <ul className="grid grid-flow-col grid-cols-2 grid-rows-4 items-center justify-center gap-4">
-                <li className="flex items-center justify-start gap-1">
-                  <HiAcademicCap />
+                <li className="skill-item flex items-center justify-start gap-2">
+                  <HiAcademicCap className="text-green-500" />
                   Python
                 </li>
-                <li className="flex items-center justify-start gap-1">
-                  <HiAcademicCap />
+                <li className="skill-item flex items-center justify-start gap-2">
+                  <HiAcademicCap className="text-green-500" />
                   Node.js
                 </li>
-                <li className="flex items-center justify-start gap-1">
-                  <HiAcademicCap />
+                <li className="skill-item flex items-center justify-start gap-2">
+                  <HiAcademicCap className="text-green-500" />
                   Express.js
                 </li>
-                <li className="flex items-center justify-start gap-1">
-                  <HiAcademicCap />
+                <li className="skill-item flex items-center justify-start gap-2">
+                  <HiAcademicCap className="text-green-500" />
                   Mongodb
                 </li>
-                <li className="flex items-center justify-start gap-1">
-                  <HiAcademicCap />
+                <li className="skill-item flex items-center justify-start gap-2">
+                  <HiAcademicCap className="text-green-500" />
                   PostgreSQL
                 </li>
-                <li className="flex items-center justify-start gap-1">
-                  <HiAcademicCap />
+                <li className="skill-item flex items-center justify-start gap-2">
+                  <HiAcademicCap className="text-green-500" />
                   AWS
                 </li>
-                <li className="flex items-center justify-start gap-1">
-                  <HiAcademicCap />
+                <li className="skill-item flex items-center justify-start gap-2">
+                  <HiAcademicCap className="text-green-500" />
                   Docker
                 </li>
-                <li className="flex items-center justify-start gap-1">
-                  <HiAcademicCap />
+                <li className="skill-item flex items-center justify-start gap-2">
+                  <HiAcademicCap className="text-green-500" />
                   Supabase
                 </li>
               </ul>
             </div>
           </div>
 
-          <div className="flex flex-col rounded-xl border-2 border-gray-400 bg-slate-200 p-4 dark:bg-slate-800">
-            <h3 className="mb-4 self-center text-xl">Blockchain</h3>
+          {/* Blockchain Card */}
+          <div className="card-hover category-blockchain flex flex-col rounded-xl border-2 bg-gradient-to-br from-slate-50 to-purple-50 p-6 shadow-md dark:from-slate-800 dark:to-slate-900">
+            <h3 className="category-title mb-4 self-center text-xl font-semibold">
+              Blockchain
+            </h3>
+            <div className="h-1 w-16 self-center rounded-full bg-gradient-to-r from-purple-400 to-purple-600 mb-4"></div>
             <div>
               <ul className="grid grid-flow-col grid-cols-2 grid-rows-4 items-center justify-center gap-4">
-                <li className="flex items-center justify-start gap-1">
-                  <HiAcademicCap />
+                <li className="skill-item flex items-center justify-start gap-2">
+                  <HiAcademicCap className="text-purple-500" />
                   Solidity
                 </li>
-                <li className="flex items-center justify-start gap-1">
-                  <HiAcademicCap />
+                <li className="skill-item flex items-center justify-start gap-2">
+                  <HiAcademicCap className="text-purple-500" />
                   Truffle
                 </li>
-                <li className="flex items-center justify-start gap-1">
-                  <HiAcademicCap />
+                <li className="skill-item flex items-center justify-start gap-2">
+                  <HiAcademicCap className="text-purple-500" />
                   Web3.js
                 </li>
-                <li className="flex items-center justify-start gap-1">
-                  <HiAcademicCap />
+                <li className="skill-item flex items-center justify-start gap-2">
+                  <HiAcademicCap className="text-purple-500" />
                   Ether.js
                 </li>
-                <li className="flex items-center justify-start gap-1">
-                  <HiAcademicCap />
+                <li className="skill-item flex items-center justify-start gap-2">
+                  <HiAcademicCap className="text-purple-500" />
                   Foundry
                 </li>
               </ul>
             </div>
           </div>
 
-          <div className="flex flex-col rounded-xl border-2 border-gray-400 bg-slate-200 p-4 dark:bg-slate-800">
-            <h3 className="mb-4 self-center text-xl">AI</h3>
+          {/* AI Card */}
+          <div className="card-hover category-ai flex flex-col rounded-xl border-2 bg-gradient-to-br from-slate-50 to-orange-50 p-6 shadow-md dark:from-slate-800 dark:to-slate-900">
+            <h3 className="category-title mb-4 self-center text-xl font-semibold">
+              AI
+            </h3>
+            <div className="h-1 w-16 self-center rounded-full bg-gradient-to-r from-orange-400 to-orange-600 mb-4"></div>
             <div>
               <ul className="grid grid-flow-col grid-cols-2 grid-rows-4 items-center justify-center gap-4">
-                <li className="flex items-center justify-start gap-1">
-                  <HiAcademicCap />
+                <li className="skill-item flex items-center justify-start gap-2">
+                  <HiAcademicCap className="text-orange-500" />
                   N8N
                 </li>
-                <li className="flex items-center justify-start gap-1">
-                  <HiAcademicCap />
+                <li className="skill-item flex items-center justify-start gap-2">
+                  <HiAcademicCap className="text-orange-500" />
                   RAG
                 </li>
-                <li className="flex items-center justify-start gap-1">
-                  <HiAcademicCap />
+                <li className="skill-item flex items-center justify-start gap-2">
+                  <HiAcademicCap className="text-orange-500" />
                   MCP
                 </li>
-                <li className="flex items-center justify-start gap-1">
-                  <HiAcademicCap />
+                <li className="skill-item flex items-center justify-start gap-2">
+                  <HiAcademicCap className="text-orange-500" />
                   Claude
                 </li>
               </ul>
