@@ -44,9 +44,6 @@ export default function Footer() {
         {/* Copyright */}
         <div className="text-center text-sm text-gray-600 dark:text-gray-400">
           <p>&copy; {currentYear} Kevin Foo. All rights reserved.</p>
-          <p className="mt-1 text-xs text-gray-500 dark:text-gray-500">
-            Built with Next.js & Tailwind CSS
-          </p>
         </div>
       </div>
     </footer>
