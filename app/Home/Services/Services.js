@@ -64,14 +64,14 @@ export default function Services() {
             return (
               <div
                 key={index}
-                className="group flex aspect-square flex-col items-center justify-center rounded-3xl border border-gray-200 bg-white p-4 shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-xl dark:border-gray-700 dark:bg-slate-900"
+                className="group flex aspect-square flex-col items-center justify-center rounded-3xl border border-gray-200 bg-white p-4 shadow-lg transition-all duration-300 hover:shadow-xl dark:border-gray-700 dark:bg-slate-900"
                 style={{
                   "--hover-shadow": service.shadowColor,
                 }}
               >
                 {/* Icon with gradient background */}
                 <div
-                  className={`mb-4 flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-br ${service.gradient} shadow-lg transition-all duration-300 group-hover:scale-110 group-hover:shadow-xl`}
+                  className={`mb-4 flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-br ${service.gradient} shadow-lg transition-all duration-300 group-hover:shadow-xl`}
                   style={{
                     boxShadow: `0 10px 30px ${service.shadowColor}`,
                   }}
