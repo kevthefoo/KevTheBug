@@ -17,10 +17,9 @@ This is a portfolio website built with Next.js 14 (App Router), Tailwind CSS, an
 
 - `/app` - Next.js App Router pages and components
   - `/api/kevingpt/route.js` - OpenAI GPT chatbot endpoint
-  - `/api/contact/` - Contact form API
   - `/Component/` - Reusable UI components (Header, Footer, ThemeToggle, Reveal, Carousel, Popup)
   - `/Home/` - Page sections (Hero, About, Skills, Showcase, Services, Contact, Blog)
-- `/asset/materials/` - Static assets (profile pictures, logos, showcase images)
+- `/asset/materials/` - Static assets (logo, profile pictures, showcase images, popup images)
 - `/data/aboutMe.json` - Portfolio data (skills, personal info, Q&A content)
 
 ### Key Patterns
@@ -39,4 +38,4 @@ This is a portfolio website built with Next.js 14 (App Router), Tailwind CSS, an
 
 Required in `.env.local`:
 - `NEXT_PUBLIC_GA_MEASUREMENT_ID` - Google Analytics
-- `OPENAI_API_KEY` - OpenAI API for KevinGPT feature
+- `OPENAI_SECRET_KEY` - OpenAI API for KevinGPT feature

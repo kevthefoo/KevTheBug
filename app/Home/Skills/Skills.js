@@ -109,6 +109,10 @@ export default function Skills() {
                   <HiAcademicCap />
                   Ether.js
                 </li>
+                <li className="flex items-center justify-start gap-1">
+                  <HiAcademicCap />
+                  Foundry
+                </li>
               </ul>
             </div>
           </div>
@@ -123,11 +127,15 @@ export default function Skills() {
                 </li>
                 <li className="flex items-center justify-start gap-1">
                   <HiAcademicCap />
-                  Rag
+                  RAG
                 </li>
                 <li className="flex items-center justify-start gap-1">
                   <HiAcademicCap />
                   MCP
+                </li>
+                <li className="flex items-center justify-start gap-1">
+                  <HiAcademicCap />
+                  Claude
                 </li>
               </ul>
             </div>
