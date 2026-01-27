@@ -64,7 +64,7 @@
 
 .trait {
   @apply bg-gradient-to-br from-rose-300 to-pink-300;
-  top: 70%;
+  top: 75%;
   left: 50%;
   border-color: transparent;
 }
