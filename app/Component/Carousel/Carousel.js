@@ -11,6 +11,7 @@ import vocablake from "@/asset/materials/showcase/vocablake.png";
 import cuthatcrap from "@/asset/materials/showcase/cuthatcrap.png";
 import yamata from "@/asset/materials/showcase/yamata.png";
 import wackywizarduni from "@/asset/materials/showcase/wackywizarduni.png";
+import itjobradar from "@/asset/materials/showcase/itjobradar.png";
 
 // Import Swiper styles
 import "swiper/css";
@@ -59,6 +60,12 @@ export default function App() {
               alt="showcase_meetjohnny"
               className="object-cover object-left"
             />
+          </Link>
+        </SwiperSlide>
+
+        <SwiperSlide>
+          <Link href="https://www.itjobradar.com/" target="_blank">
+            <Image src={itjobradar} alt="itjobradar" />
           </Link>
         </SwiperSlide>
 
