@@ -12,6 +12,7 @@ import cuthatcrap from "@/asset/materials/showcase/cuthatcrap.png";
 import yamata from "@/asset/materials/showcase/yamata.png";
 import wackywizarduni from "@/asset/materials/showcase/wackywizarduni.png";
 import itjobradar from "@/asset/materials/showcase/itjobradar.png";
+import awsplayboard from "@/asset/materials/showcase/awsplayboard.png";
 
 // Import Swiper styles
 import "swiper/css";
@@ -64,35 +65,35 @@ export default function App() {
         </SwiperSlide>
 
         <SwiperSlide>
+          <Link href="https://www.aws-playboard.com/" target="_blank">
+            <Image src={awsplayboard} alt="aws-playboard" />
+          </Link>
+        </SwiperSlide>
+        <SwiperSlide>
           <Link href="https://www.itjobradar.com/" target="_blank">
             <Image src={itjobradar} alt="itjobradar" />
           </Link>
         </SwiperSlide>
-
         <SwiperSlide>
           <Link href="https://www.wackywizarduni.com/" target="_blank">
             <Image src={wackywizarduni} alt="showcase_wackywizarduni" />
           </Link>
         </SwiperSlide>
-
         <SwiperSlide>
           <Link href="https://ferrolink.io/" target="_blank">
             <Image src={ferrolink} alt="showcase_ferrolink" />
           </Link>
         </SwiperSlide>
-
         <SwiperSlide>
           <Link href="https://www.cuthatcrap.com/" target="_blank">
             <Image src={cuthatcrap} alt="showcase_cuthatcrap" />
           </Link>
         </SwiperSlide>
-
         <SwiperSlide>
           <Link href="https://www.vocablake.com/" target="_blank">
             <Image src={vocablake} alt="showcase_vocablake" />
           </Link>
         </SwiperSlide>
-
         <SwiperSlide>
           <Link href="https://www.yamata-lab.com/" target="_blank">
             <Image src={yamata} alt="showcase_yamata-lab" />
