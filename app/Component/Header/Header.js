@@ -45,28 +45,33 @@ export default function Header() {
       <nav className="max-[992px]:text-sm max-md:hidden">
         <ul className="flex items-center justify-between gap-6 max-[992px]:gap-[14px]">
           <li>
-            <a href="#about" className="nav-link py-1 transition-colors hover:text-blue-500">
+            <a href="/#about" className="nav-link py-1 transition-colors hover:text-blue-500">
               About
             </a>
           </li>
           <li>
-            <a href="#skills" className="nav-link py-1 transition-colors hover:text-blue-500">
+            <a href="/#skills" className="nav-link py-1 transition-colors hover:text-blue-500">
               Skills
             </a>
           </li>
           <li>
-            <a href="#showcase" className="nav-link py-1 transition-colors hover:text-blue-500">
+            <a href="/#showcase" className="nav-link py-1 transition-colors hover:text-blue-500">
               Showcase
             </a>
           </li>
           <li>
-            <a href="#services" className="nav-link py-1 transition-colors hover:text-blue-500">
+            <a href="/#services" className="nav-link py-1 transition-colors hover:text-blue-500">
               Services
             </a>
           </li>
           <li>
-            <a href="#contact" className="nav-link py-1 transition-colors hover:text-blue-500">
+            <a href="/#contact" className="nav-link py-1 transition-colors hover:text-blue-500">
               Contact
+            </a>
+          </li>
+          <li>
+            <a href="/blog" className="nav-link py-1 transition-colors hover:text-blue-500">
+              Blog
             </a>
           </li>
         </ul>
@@ -146,28 +151,33 @@ export default function Header() {
         <nav className={active ? "" : ""}>
           <ul className="flex flex-col justify-center gap-8 text-center">
             <li className="relative before:absolute before:right-[95px] before:top-[10px] before:h-[1px] before:w-16 before:bg-black before:content-[''] after:absolute after:left-[95px] after:top-[10px] after:h-[1px] after:w-16 after:bg-black after:content-[''] dark:before:bg-white dark:after:bg-white">
-              <a href="#about" onClick={() => setActive(false)}>
+              <a href="/#about" onClick={() => setActive(false)}>
                 About
               </a>
             </li>
             <li className="relative before:absolute before:right-[95px] before:top-[10px] before:h-[1px] before:w-16 before:bg-black before:content-[''] after:absolute after:left-[95px] after:top-[10px] after:h-[1px] after:w-16 after:bg-black after:content-[''] dark:before:bg-white dark:after:bg-white">
-              <a href="#skills" onClick={() => setActive(false)}>
+              <a href="/#skills" onClick={() => setActive(false)}>
                 Skills
               </a>
             </li>
             <li className="relative before:absolute before:right-[95px] before:top-[10px] before:h-[1px] before:w-16 before:bg-black before:content-[''] after:absolute after:left-[95px] after:top-[10px] after:h-[1px] after:w-16 after:bg-black after:content-[''] dark:before:bg-white dark:after:bg-white">
-              <a href="#showcase" onClick={() => setActive(false)}>
+              <a href="/#showcase" onClick={() => setActive(false)}>
                 Showcase
               </a>
             </li>
             <li className="relative before:absolute before:right-[95px] before:top-[10px] before:h-[1px] before:w-16 before:bg-black before:content-[''] after:absolute after:left-[95px] after:top-[10px] after:h-[1px] after:w-16 after:bg-black after:content-[''] dark:before:bg-white dark:after:bg-white">
-              <a href="#services" onClick={() => setActive(false)}>
+              <a href="/#services" onClick={() => setActive(false)}>
                 Services
               </a>
             </li>
             <li className="relative before:absolute before:right-[95px] before:top-[10px] before:h-[1px] before:w-16 before:bg-black before:content-[''] after:absolute after:left-[95px] after:top-[10px] after:h-[1px] after:w-16 after:bg-black after:content-[''] dark:before:bg-white dark:after:bg-white">
-              <a href="#contact" onClick={() => setActive(false)}>
+              <a href="/#contact" onClick={() => setActive(false)}>
                 Contact
+              </a>
+            </li>
+            <li className="relative before:absolute before:right-[95px] before:top-[10px] before:h-[1px] before:w-16 before:bg-black before:content-[''] after:absolute after:left-[95px] after:top-[10px] after:h-[1px] after:w-16 after:bg-black after:content-[''] dark:before:bg-white dark:after:bg-white">
+              <a href="/blog" onClick={() => setActive(false)}>
+                Blog
               </a>
             </li>
           </ul>
