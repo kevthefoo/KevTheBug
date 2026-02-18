@@ -9,7 +9,7 @@ import { FaArrowDown } from "react-icons/fa";
 
 export default function Hero() {
   return (
-    <section className="min-h-screen items-center justify-evenly pt-20 max-md:flex-col max-md:justify-start max-md:gap-8 max-md:pt-[30%] max-md:text-center dark:bg-neutral-800">
+    <section className="min-h-screen items-center justify-evenly pt-20 max-md:flex-col max-md:justify-start max-md:gap-8 max-md:pt-[30%] max-md:text-center">
       <div className="php_image_container relative h-[500px] w-[300px] max-[992px]:h-[400px] max-[992px]:w-[250px] max-md:h-[300px] max-md:w-[300px] max-md:rounded-full max-[496px]:h-[200px] max-[496px]:w-[200px]">
         {/* Glow effect behind image */}
         <div className="absolute -inset-4 rounded-3xl bg-gradient-to-br from-blue-500/20 to-purple-500/20 blur-2xl max-md:rounded-full"></div>

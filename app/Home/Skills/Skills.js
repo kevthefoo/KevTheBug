@@ -7,7 +7,7 @@ export default function Skills() {
   return (
     <section
       id="skills"
-      className="min-h-screen flex-col justify-start pt-16 dark:bg-neutral-800"
+      className="min-h-screen flex-col justify-start pt-16"
     >
       <h1>Skills</h1>
       <span className="mb-12 text-xl text-gray-500">What I got in my bag</span>
