@@ -1,56 +1,87 @@
 ---
-title: "Building My Portfolio with Next.js 14"
-date: "2025-01-15"
-excerpt: "A deep dive into how I built this portfolio website using Next.js 14 App Router, Tailwind CSS, and Framer Motion."
-tags: ["Next.js", "React", "Tailwind CSS", "Portfolio"]
-readTime: "5 min read"
+title: How I start my software engineer career?
+date: '2025-01-15'
+excerpt: >-
+  Started in 2021 during the NFT boom, self-taught Solidity and frontend, gained
+  industry experience, then moved to Australia for a Master’s in IT.
+tags:
+  - Portfolio
+readTime: 5 min read
+coverImage: null
+status: published
+---
+## The Beginning – Falling Into Blockchain (2021)
+
+I began this journey in 2021, during the peak of the blockchain boom.  
+At that time, NFTs were everywhere, and I was deeply fascinated by the space. Naturally, I wanted to launch my own NFT project.
+
+To make that happen, I started searching for online resources and teaching myself everything from scratch.
+
+Here’s the funny part:
+
+Most software engineers start with Python or JavaScript.  
+If you studied Computer Science, your first language was probably C or Java.
+
+But me?
+
+My first programming language was **Solidity** — a language used to write smart contracts.  
+Its syntax is somewhat similar to JavaScript, but at the time, I knew absolutely nothing about software development.
+
+Looking back now, it’s honestly kind of hilarious.
+
+I jumped straight into smart contract programming without understanding the basics of software engineering. But that was the start.
+
 ---
 
-## Why Next.js 14?
+## 🌐 Learning Frontend the Hard Way
 
-When I set out to build my portfolio, I wanted something fast, SEO-friendly, and enjoyable to develop with. Next.js 14 with the App Router was the clear winner.
+To launch an NFT project, writing smart contracts isn’t enough.
 
-The new App Router brings server components by default, which means faster page loads and better SEO out of the box. For a portfolio site, this is exactly what you want — recruiters and visitors should see your content instantly.
+You also need a website to introduce your project and integrate the smart contract so users can interact with it.
 
-## The Tech Stack
+So I began learning:
+- HTML  
+- CSS  
+- JavaScript  
 
-Here's what powers this site:
+My early learning method? Extremely inefficient.
 
-- **Next.js 14** — App Router with server and client components
-- **Tailwind CSS** — Utility-first styling with custom dark mode
-- **Framer Motion** — Smooth scroll-based reveal animations
-- **Swiper** — Beautiful project showcase carousel
+I would download other people’s website HTML files, inspect their CSS through DevTools, and try to reverse-engineer everything.
 
-## Key Design Decisions
+It was a complete disaster.
 
-### Dark Mode with Selector Strategy
+Eventually, I realized I needed to start from the fundamentals.  
+I searched for tutorials on YouTube and bought discounted courses on Udemy. I spent my days obsessively watching lessons and building projects on my own.
 
-Instead of using Tailwind's default media query dark mode, I opted for the `selector` strategy. This gives users explicit control over their theme preference rather than relying on system settings.
+Back then, there was no ChatGPT.
 
-```javascript
-// tailwind.config.js
-module.exports = {
-  darkMode: 'selector',
-  // ...
-}
-```
+Whenever I encountered a problem, I had to Google it or search through Stack Overflow threads. It was slow and sometimes frustrating — but I kind of miss those days.
 
-### Scroll-Based Reveal Animations
+Even though it wasn’t efficient, solving a problem after hours of searching gave me an incredible sense of accomplishment.
 
-Every section uses a custom `<Reveal>` component powered by Framer Motion's `useInView` hook. Elements slide in smoothly as you scroll, creating a polished browsing experience without overwhelming the visitor.
+---
 
-### Component-First Architecture
+## 💼 Stepping Into the Industry
 
-Each section lives in its own directory under `/app/Home/`, making it easy to maintain and update individual sections without touching unrelated code.
+After COVID, I decided to test myself in the real world.
 
-## Lessons Learned
+I joined a web development outsourcing company.  
+That was where I truly learned the **standard software development workflow**.
 
-1. **Keep animations subtle** — It's tempting to add flashy animations everywhere, but restraint creates a more professional feel.
-2. **Mobile-first is non-negotiable** — Over 60% of portfolio views come from mobile devices.
-3. **Performance matters** — Every millisecond of load time counts when someone is evaluating your work.
+I was very fortunate to meet an amazing mentor there.
 
-## What's Next
+When I first joined the company, my CSS was… honestly, a disaster.
 
-I'm planning to add a blog system (you're reading it now!), more interactive project showcases, and possibly a KevinGPT chatbot that can answer questions about my experience.
+But he was incredibly patient and guided me step by step. I’m deeply grateful for his mentorship.
 
-Stay tuned for more updates!
+---
+
+## 🇦🇺 A New Chapter – Studying in Australia
+
+After nearly two years of growth at the company, I made a life decision.
+
+I chose to resign and pursue a Master’s degree in IT in Australia.
+
+And that’s roughly how my journey as a software engineer began.
+
+There are many more funny and chaotic stories in between — I’ll share them another time.
