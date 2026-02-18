@@ -5,7 +5,7 @@ excerpt: >-
   Started in 2021 during the NFT boom, self-taught Solidity and frontend, gained
   industry experience, then moved to Australia for a Master’s in IT.
 tags:
-  - Portfolio
+  - career
 readTime: 5 min read
 coverImage: null
 status: published
