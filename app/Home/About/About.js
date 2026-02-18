@@ -33,7 +33,7 @@ export default function About() {
 
   return (
     <section id="about" className="h-screen flex-col justify-start pt-16">
-      <h1>About Me</h1>
+      <h1><span className="gradient-text">About Me</span></h1>
       <span className="mb-12 text-xl text-gray-500">What I am made of</span>
       <div className="relative h-full w-full">
         {Object.keys(descriptionData).map((key, index) => (

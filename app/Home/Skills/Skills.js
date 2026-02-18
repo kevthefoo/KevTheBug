@@ -9,7 +9,7 @@ export default function Skills() {
       id="skills"
       className="min-h-screen flex-col justify-start pt-16"
     >
-      <h1>Skills</h1>
+      <h1><span className="gradient-text">Skills</span></h1>
       <span className="mb-12 text-xl text-gray-500">What I got in my bag</span>
       <Reveal yTranslate={300} delayTime={0.15}>
         <div className="mx-auto grid h-full w-4/5 grid-cols-2 justify-center gap-8 max-[992px]:w-full max-[992px]:text-[14px] max-md:grid-cols-1">

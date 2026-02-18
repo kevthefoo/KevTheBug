@@ -13,7 +13,7 @@ export default function Contact() {
       <div className="mx-auto max-w-4xl">
         {/* Header */}
         <div className="mb-16 text-center">
-          <h1>Contact</h1>
+          <h1><span className="gradient-text">Contact</span></h1>
           <span className="mb-12 text-xl text-gray-500">
             Get more infomration about me
           </span>

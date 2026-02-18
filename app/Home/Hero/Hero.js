@@ -59,7 +59,7 @@ export default function Hero() {
         <Reveal delayTime={1.25}>
           <Link
             href="/#about"
-            className="group flex items-center gap-2 self-center rounded-2xl bg-gradient-to-r from-blue-600 to-purple-600 px-8 py-4 font-bold text-white shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-blue-500/25 max-[992px]:rounded-xl max-[992px]:px-6 max-[992px]:py-3 max-[992px]:text-[14px] dark:from-blue-500 dark:to-purple-500"
+            className="group z-10 flex items-center gap-2 self-center rounded-2xl bg-gradient-to-r from-blue-600 to-purple-600 px-8 py-4 font-bold text-white shadow-lg transition-all duration-300 max-[992px]:rounded-xl max-[992px]:px-6 max-[992px]:py-3 max-[992px]:text-[14px] dark:from-blue-500 dark:to-purple-500"
           >
             Learn More
             <FaArrowDown className="transition-transform duration-300 group-hover:translate-y-1" />

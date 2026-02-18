@@ -55,7 +55,7 @@ export default function Services() {
       id="services"
       className="min-f-screen flex-col justify-start pb-16 pt-16"
     >
-      <h1>Services</h1>
+      <h1><span className="gradient-text">Services</span></h1>
       <span className="mb-12 text-xl text-gray-500">What I can provide</span>
       <Reveal xTranslate={-300} yTranslate={0}>
         <div className="mx-auto grid h-full grid-cols-3 gap-10 text-center max-[992px]:gap-6 max-md:grid-cols-2">
