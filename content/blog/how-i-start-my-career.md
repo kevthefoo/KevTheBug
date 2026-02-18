@@ -33,7 +33,7 @@ I jumped straight into smart contract programming without understanding the basi
 
 ---
 
-## Learning Frontend the Hard Way
+## 🌐 Learning Frontend the Hard Way
 
 To launch an NFT project, writing smart contracts isn’t enough.
 
@@ -61,7 +61,7 @@ Even though it wasn’t efficient, solving a problem after hours of searching ga
 
 ---
 
-## Stepping Into the Industry
+## 💼 Stepping Into the Industry
 
 After COVID, I decided to test myself in the real world.
 
@@ -76,7 +76,7 @@ But he was incredibly patient and guided me step by step. I’m deeply grateful 
 
 ---
 
-## A New Chapter – Studying in Australia
+## 🇦🇺 A New Chapter – Studying in Australia
 
 After nearly two years of growth at the company, I made a life decision.
 
