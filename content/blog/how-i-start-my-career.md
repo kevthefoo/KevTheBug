@@ -1,5 +1,5 @@
 ---
-title: How I start my software engineer career
+title: How I start my software engineer career?
 date: '2025-01-15'
 excerpt: >-
   Started in 2021 during the NFT boom, self-taught Solidity and frontend, gained
@@ -76,7 +76,7 @@ But he was incredibly patient and guided me step by step. I’m deeply grateful 
 
 ---
 
-## 🇦🇺 A New Chapter – Studying in Australia
+## A New Chapter – Studying in Australia
 
 After nearly two years of growth at the company, I made a life decision.
 
