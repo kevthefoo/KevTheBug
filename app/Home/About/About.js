@@ -1,7 +1,5 @@
 "use client";
 import { useState, useEffect } from "react";
-import Image from "next/image";
-
 import "./about.css";
 import Popup from "@/app/Component/Popup/Popup";
 import descriptionData from "./Description";
@@ -50,20 +48,6 @@ export default function About() {
         ))}
       </div>
       {isPopupVisible && <Popup content={popupContent} onClose={closePopup} />}
-
-      {/* Hidden preload container for popup images */}
-      <div className="hidden">
-        {Object.values(descriptionData).map((item, index) => (
-          <Image
-            key={index}
-            src={item.icon}
-            alt=""
-            width={150}
-            height={150}
-            priority
-          />
-        ))}
-      </div>
     </section>
   );
 }

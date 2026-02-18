@@ -49,6 +49,7 @@ export default function Popup({ content, onClose }) {
         <Image
           src={content.icon}
           alt={content.value}
+          unoptimized
           priority={true}
           loading="eager"
           className="absolute bottom-4 right-1/2 h-[150px] w-[150px] translate-x-1/2 drop-shadow-lg max-md:h-[100px] max-md:w-[100px]"
