@@ -69,18 +69,18 @@ export default function Header() {
           </li>
           <li>
             <a
-              href="/#contact"
-              className="nav-link py-1 transition-colors hover:text-blue-500"
-            >
-              Contact
-            </a>
-          </li>
-          <li>
-            <a
               href="/blog"
               className="nav-link py-1 transition-colors hover:text-blue-500"
             >
               Blog
+            </a>
+          </li>
+          <li>
+            <a
+              href="/#contact"
+              className="nav-link py-1 transition-colors hover:text-blue-500"
+            >
+              Contact
             </a>
           </li>
         </ul>
