@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { FaLinkedin, FaGithubSquare } from "react-icons/fa";
 import { FaSquareXTwitter } from "react-icons/fa6";
 import ThemeToggle from "@/app/Component/ThemeToggle/ThemeToggle";
+import Link from "next/link";
 
 export default function Header() {
   const [active, setActive] = useState(false);
@@ -36,11 +37,15 @@ export default function Header() {
           : "border-gray-200 bg-white/95 backdrop-blur-sm dark:border-gray-800 dark:bg-neutral-900/95"
       } dark:text-white`}
     >
-      <div className="flex h-full items-center justify-center gap-2 max-md:ml-5">
+      <Link
+        href="/"
+        className="flex h-full items-center justify-center gap-2 max-md:ml-5"
+      >
         <p className="select-none text-[26px] font-medium max-[992px]:text-xl">
           Kevin Foo
         </p>
-      </div>
+      </Link>
+
       <nav className="max-[992px]:text-sm max-md:hidden">
         <ul className="flex items-center justify-between gap-6 max-[992px]:gap-[14px]">
           <li>

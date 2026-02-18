@@ -31,11 +31,9 @@ export default function RootLayout({ children }) {
             });
           `}
       </Script>
-      <body className={inter.className}>
+      <body className={`${inter.className} min-h-screen`}>
         <Header />
-        <main className="transition duration-700 ease-linear">
-          {children}
-        </main>
+        <main className="transition duration-700 ease-linear">{children}</main>
         <Footer />
       </body>
 

@@ -11,7 +11,7 @@ export default function Skills() {
     >
       <h1>Skills</h1>
       <span className="mb-12 text-xl text-gray-500">What I got in my bag</span>
-      <Reveal yTranslate={300}>
+      <Reveal yTranslate={300} delayTime={0.15}>
         <div className="mx-auto grid h-full w-4/5 grid-cols-2 justify-center gap-8 max-[992px]:w-full max-[992px]:text-[14px] max-md:grid-cols-1">
           {/* Frontend Card */}
           <div className="card-hover category-frontend flex flex-col rounded-xl border-2 bg-gradient-to-br from-slate-50 to-blue-50 p-6 shadow-md dark:from-slate-800 dark:to-slate-900">

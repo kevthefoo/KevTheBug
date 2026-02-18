@@ -5,16 +5,20 @@ import { useState, useEffect } from "react";
 import "./themetoggle.css";
 
 export default function ThemeToggle() {
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(() => {
+    if (typeof window !== "undefined") {
+      return localStorage.getItem("theme") === "dark";
+    }
+    return false;
+  });
 
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
   };
 
   useEffect(() => {
-    const q = document.querySelectorAll(".toggle_input");
-    console.log(q)
-    
+    localStorage.setItem("theme", darkMode ? "dark" : "light");
+
     if (darkMode) {
       document.body.classList.add("dark");
 
@@ -44,7 +48,8 @@ export default function ThemeToggle() {
         className="toggle_input"
         type="checkbox"
         id="darkmode-toggle"
-        onClick={toggleDarkMode}
+        checked={darkMode}
+        onChange={toggleDarkMode}
       />
       <label className="toggle_label" htmlFor="darkmode-toggle"></label>
     </>
