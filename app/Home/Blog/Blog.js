@@ -20,12 +20,12 @@ export default function Blog() {
   return (
     <section id="blog" className="!flex-col !items-center py-16">
       <Reveal yTranslate={40}>
-        <h1 className="mb-2 text-center text-3xl font-bold">
+        <h1 className="text-center">
           <span className="gradient-text">Blog</span>
         </h1>
-        <p className="mb-10 text-center text-gray-500 dark:text-gray-400">
+        <span className="mb-12 text-center text-xl text-gray-500">
           Latest thoughts and articles
-        </p>
+        </span>
       </Reveal>
 
       <div className="grid w-full max-w-5xl gap-5 md:grid-cols-3">
