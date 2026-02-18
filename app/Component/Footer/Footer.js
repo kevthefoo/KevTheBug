@@ -1,4 +1,5 @@
 import { FaLinkedin, FaGithub, FaEnvelope } from "react-icons/fa";
+import { FaSquareXTwitter } from "react-icons/fa6";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -29,6 +30,17 @@ export default function Footer() {
           >
             <FaLinkedin />
           </a>
+
+          <a
+            href="https://x.com/kevthefoo/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="icon-hover text-2xl text-gray-600 dark:text-gray-400"
+            title="X"
+          >
+            <FaSquareXTwitter />
+          </a>
+
           <a
             href="mailto:kevthebug@gmail.com"
             className="icon-hover text-2xl text-gray-600 dark:text-gray-400"
