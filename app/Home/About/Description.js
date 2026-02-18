@@ -12,7 +12,7 @@ const descriptionData = {
   main: {
     value: "Goodness",
     description:
-      "I always believe that goodness is the noblest virtue and put it in the first place. I will always be kind even if I have to lose!",
+      "I always believe that goodness is the noblest virtue and put it in the first place. Never sell out your soul to anyone or anything.",
     icon: goodness,
   },
   mbti: {
