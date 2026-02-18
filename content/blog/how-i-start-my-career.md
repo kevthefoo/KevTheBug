@@ -1,5 +1,5 @@
 ---
-title: How I start my software engineer career
+title: How I start my software engineer career?
 date: '2025-01-15'
 excerpt: >-
   Started in 2021 during the NFT boom, self-taught Solidity and frontend, gained
@@ -33,7 +33,7 @@ I jumped straight into smart contract programming without understanding the basi
 
 ---
 
-## 🌐 Learning Frontend the Hard Way
+## Learning Frontend the Hard Way
 
 To launch an NFT project, writing smart contracts isn’t enough.
 
