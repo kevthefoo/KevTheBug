@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { FaLinkedin, FaGithubSquare } from "react-icons/fa";
+import { FaSquareXTwitter } from "react-icons/fa6";
 import ThemeToggle from "@/app/Component/ThemeToggle/ThemeToggle";
 import Image from "next/image";
 import logo from "@/asset/materials/logo/logo.png";
@@ -45,32 +46,42 @@ export default function Header() {
       <nav className="max-[992px]:text-sm max-md:hidden">
         <ul className="flex items-center justify-between gap-6 max-[992px]:gap-[14px]">
           <li>
-            <a href="/#about" className="nav-link py-1 transition-colors hover:text-blue-500">
+            <a
+              href="/#about"
+              className="nav-link py-1 transition-colors hover:text-blue-500"
+            >
               About
             </a>
           </li>
           <li>
-            <a href="/#skills" className="nav-link py-1 transition-colors hover:text-blue-500">
+            <a
+              href="/#skills"
+              className="nav-link py-1 transition-colors hover:text-blue-500"
+            >
               Skills
             </a>
           </li>
           <li>
-            <a href="/#showcase" className="nav-link py-1 transition-colors hover:text-blue-500">
+            <a
+              href="/#showcase"
+              className="nav-link py-1 transition-colors hover:text-blue-500"
+            >
               Showcase
             </a>
           </li>
           <li>
-            <a href="/#services" className="nav-link py-1 transition-colors hover:text-blue-500">
-              Services
-            </a>
-          </li>
-          <li>
-            <a href="/#contact" className="nav-link py-1 transition-colors hover:text-blue-500">
+            <a
+              href="/#contact"
+              className="nav-link py-1 transition-colors hover:text-blue-500"
+            >
               Contact
             </a>
           </li>
           <li>
-            <a href="/blog" className="nav-link py-1 transition-colors hover:text-blue-500">
+            <a
+              href="/blog"
+              className="nav-link py-1 transition-colors hover:text-blue-500"
+            >
               Blog
             </a>
           </li>
@@ -104,6 +115,16 @@ export default function Header() {
               className="icon-hover inline-block"
             >
               <FaLinkedin />
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://x.com/kevthefoo"
+              target="_blank"
+              title="X (Twitter)"
+              className="icon-hover inline-block"
+            >
+              <FaSquareXTwitter />
             </a>
           </li>
         </ul>
