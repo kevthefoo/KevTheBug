@@ -61,7 +61,7 @@ Even though it wasn’t efficient, solving a problem after hours of searching ga
 
 ---
 
-## 💼 Stepping Into the Industry
+## Stepping Into the Industry
 
 After COVID, I decided to test myself in the real world.
 
