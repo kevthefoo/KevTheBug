@@ -15,13 +15,12 @@ export default function BubbleReveal({
   const mainControls = useAnimation();
 
   useEffect(() => {
-    console.log(isInView);
     if (isInView) {
       mainControls.start("visible");
     } else {
       mainControls.start("hidden");
     }
-  }, [isInView]);
+  }, [isInView, mainControls]);
 
   return (
     <motion.div
@@ -30,7 +29,7 @@ export default function BubbleReveal({
       ref={ref}
       variants={{
         hidden: { opacity: 0, x: "-50%", y: 44 },
-        visible: { opacity: 1, x:"-50%", y: -56 },
+        visible: { opacity: 1, x: "-50%", y: -56 },
       }}
       initial="hidden"
       animate={mainControls}

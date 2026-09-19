@@ -1,0 +1,38 @@
+{
+  "goodness": {
+    "title": "Goodness",
+    "description": "I always believe that goodness is the noblest virtue and put it in the first place. Never sell out your soul to anyone or anything."
+  },
+  "intp": {
+    "title": "INTP",
+    "description": "As an INTP, I don't fully believe in MBTI, there must be some leaks in this system...Why put yourself in the frame of 16 types? Everyone is an unique individual in the world, even twins are different!"
+  },
+  "dogs": {
+    "title": "Dog Lover",
+    "description": "I would like to give my soul to every Dalmatian and German Shepherd. How can you not love these adorable creatures?"
+  },
+  "disney": {
+    "title": "Disney",
+    "description": "When I feel down, I always listen their music, and it reminds me of my happy childhood. One of my dream is to visit every Disneyland in the world!"
+  },
+  "sushi": {
+    "title": "Sushi",
+    "description": "Nigiri! Sashimi! Maki! Temaki! Uramaki! Inari! Oshi! Gunkan! Ebi! Tempura! Give me more until I choke!"
+  },
+  "basketball": {
+    "title": "NBA",
+    "description": "Inherited from my grandpa, I have been watching NBA games for over 20 years. Paul Pierce, Kevin Garnett, and Rajon Rondo are my favorite Celtics."
+  },
+  "movies": {
+    "title": "Movies",
+    "description": "Interstellar is one of my favorite films, actually I love all Christopher Nolan's movies. I am a big fan of him!"
+  },
+  "piano": {
+    "title": "Piano",
+    "description": "Not really good at...but I love playing it. Hope I could play all Hans Zimmer's masterpeices one day."
+  },
+  "creativity": {
+    "title": "Creativity",
+    "description": "One of my strengths is creativity. I always like to fix problems in a surprising way. Boring is the last thing I want to be!"
+  }
+}

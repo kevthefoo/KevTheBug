@@ -13,7 +13,9 @@ export default function Contact() {
       <div className="mx-auto max-w-4xl">
         {/* Header */}
         <div className="mb-16 text-center">
-          <h1><span className="gradient-text">Contact</span></h1>
+          <h1>
+            <span className="gradient-text">Contact</span>
+          </h1>
           <span className="mb-12 text-xl text-gray-500">
             Get more infomration about me
           </span>
@@ -23,7 +25,7 @@ export default function Contact() {
         <div className="grid gap-8 md:grid-cols-3">
           {/* Email Card */}
           <a
-            href="mailto:kevthebug@gmail.com"
+            href="mailto:kevthefoo@gmail.com"
             className="contact-card group relative overflow-hidden rounded-3xl border border-gray-100 bg-white p-8 transition-all duration-300 hover:-translate-y-2 dark:border-gray-700 dark:bg-slate-800"
           >
             <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-blue-600/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
@@ -43,7 +45,7 @@ export default function Contact() {
 
           {/* LinkedIn Card */}
           <a
-            href="https://www.linkedin.com/in/kevthebug/"
+            href="https://www.linkedin.com/in/kevthefoo/"
             target="_blank"
             rel="noopener noreferrer"
             className="contact-card group relative overflow-hidden rounded-3xl border border-gray-100 bg-white p-8 transition-all duration-300 hover:-translate-y-2 dark:border-gray-700 dark:bg-slate-800"
@@ -65,7 +67,7 @@ export default function Contact() {
 
           {/* X (Twitter) Card */}
           <a
-            href="https://x.com/kevthebug"
+            href="https://x.com/kevthefoo"
             target="_blank"
             rel="noopener noreferrer"
             className="contact-card group relative overflow-hidden rounded-3xl border border-gray-100 bg-white p-8 transition-all duration-300 hover:-translate-y-2 dark:border-gray-700 dark:bg-slate-800"

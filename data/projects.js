@@ -1,0 +1,58 @@
+export const projects = [
+  {
+    name: "Meet Johnny",
+    type: "Web",
+    url: "https://meetjohnny.com",
+    tag: "WEB EXPERIENCE",
+    description: "From a first line of code to a real web experience.",
+  },
+  {
+    name: "AWS Playboard",
+    type: "Tools",
+    url: "https://www.aws-playboard.com/",
+    tag: "DEVELOPER TOOL",
+    description: "An interactive playground for exploring the cloud.",
+  },
+  {
+    name: "IT Job Radar",
+    type: "Tools",
+    url: "https://www.itjobradar.com/",
+    tag: "CAREER EXPLORATION",
+    description: "Find your next opportunity in the world of tech.",
+  },
+  {
+    name: "Wacky Wizard Uni",
+    type: "Web",
+    url: "https://www.wackywizarduni.com/",
+    tag: "CREATIVE WEB",
+    description: "A little magic, a little imagination, a lot of code.",
+  },
+  {
+    name: "Ferrolink",
+    type: "Web",
+    url: "https://ferrolink.io/",
+    tag: "WEB EXPERIENCE",
+    description: "Connecting the dots between ideas and interfaces.",
+  },
+  {
+    name: "Cut That Crap",
+    type: "Tools",
+    url: "https://www.cuthatcrap.com/",
+    tag: "EVERYDAY TOOL",
+    description: "Less friction. More getting things done.",
+  },
+  {
+    name: "Vocablake",
+    type: "Tools",
+    url: "https://www.vocablake.com/",
+    tag: "LEARNING TOOL",
+    description: "Make learning new words an everyday adventure.",
+  },
+  {
+    name: "Yamata Lab",
+    type: "Web",
+    url: "https://www.yamata-lab.com/",
+    tag: "DIGITAL EXPERIENCE",
+    description: "A digital playground for ideas brought to life.",
+  },
+];

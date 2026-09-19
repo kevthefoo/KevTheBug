@@ -1,43 +1,17 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Script from "next/script";
-import Header from "./Component/Header/Header";
-import Footer from "./Component/Footer/Footer";
-import { GoogleAnalytics } from "@next/third-parties/google";
-
-const inter = Inter({ subsets: ["latin"] });
-
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 export const metadata = {
-  title: "Kevin Foo",
-  description: "Kevin Foo's portfolio website",
+  title: "Kevin Foo — A conversational portfolio",
+  description:
+    "Get to know Kevin Foo. Explore his work, skills and story through a conversation.",
 };
-
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      {/* Google Analytics */}
-      <Script
-        src={`https://www.googletagmanager.com/gtag/js?id=G-FPYGJYVHMW`}
-        strategy="afterInteractive"
-      />
-      <Script id="google-analytics" strategy="afterInteractive">
-        {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', '${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}', {
-              page_title: document.title,
-              page_location: window.location.href,
-            });
-          `}
-      </Script>
-      <body className={`${inter.className} min-h-screen`}>
-        <Header />
-        <main className="transition duration-700 ease-linear">{children}</main>
-        <Footer />
+      <body className={inter.variable}>
+        <main id="main-content">{children}</main>
       </body>
-
-      <GoogleAnalytics gaId="G-FPYGJYVHMW" />
     </html>
   );
 }
