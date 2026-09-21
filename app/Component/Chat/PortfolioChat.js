@@ -12,6 +12,11 @@ import {
   LuCode,
   LuCopy,
   LuCheck,
+  LuBookOpen,
+  LuX,
+  LuHeart,
+  LuMoon,
+  LuSun,
 } from "react-icons/lu";
 import portrait from "@/asset/materials/pfp/pfp_bright.png";
 import { knowledge } from "@/data/knowledge.mjs";
@@ -22,19 +27,49 @@ const prompts = [
   ["My journey", "How did Kevin start his career?", LuCode],
   ["Get in touch", "How can I contact Kevin?", LuMail],
 ];
-export default function PortfolioChat({ posts, live = false }) {
+const expandableSourceIds = new Set(["journal"]);
+const aboutFollowUps = [
+  ["My interests", "What are your interests?", LuHeart],
+  ["My skills", "What skills do you use?", LuCode],
+  ["My projects", "Show me your projects", LuLayers],
+  ["My journey", "Tell me about your career journey", LuBookOpen],
+];
+export default function PortfolioChat({ posts }) {
   const [messages, setMessages] = useState([]),
     [input, setInput] = useState(""),
     [busy, setBusy] = useState(false),
     [remaining, setRemaining] = useState(null),
-    [copied, setCopied] = useState(null);
+    [copied, setCopied] = useState(null),
+    [selectedArticle, setSelectedArticle] = useState(null),
+    [theme, setTheme] = useState("dark");
   const bottom = useRef(null),
     controller = useRef(null),
-    field = useRef(null);
+    field = useRef(null),
+    closeArticleButton = useRef(null),
+    previousFocus = useRef(null),
+    articleModal = useRef(null);
+  const careerPost = posts.find(
+    (post) => post.slug === "how-i-start-my-career",
+  );
   useEffect(() => {
     bottom.current?.scrollIntoView({ behavior: "smooth", block: "end" });
   }, [messages, busy]);
   useEffect(() => () => controller.current?.abort(), []);
+  useEffect(() => {
+    setTheme(document.documentElement.dataset.theme || "dark");
+  }, []);
+  useEffect(() => {
+    if (!selectedArticle) return;
+    closeArticleButton.current?.focus();
+    const closeOnEscape = (event) => {
+      if (event.key === "Escape") {
+        setSelectedArticle(null);
+        previousFocus.current?.focus();
+      }
+    };
+    document.addEventListener("keydown", closeOnEscape);
+    return () => document.removeEventListener("keydown", closeOnEscape);
+  }, [selectedArticle]);
   function clear() {
     controller.current?.abort();
     controller.current = null;
@@ -43,12 +78,18 @@ export default function PortfolioChat({ posts, live = false }) {
     setInput("");
     field.current?.focus();
   }
+  function toggleTheme() {
+    const nextTheme = theme === "light" ? "dark" : "light";
+    document.documentElement.dataset.theme = nextTheme;
+    localStorage.setItem("kevthefoo-theme", nextTheme);
+    setTheme(nextTheme);
+  }
   function browse() {
     setMessages((m) => [
       ...m,
       {
         role: "assistant",
-        text: "Explore Kevin’s published portfolio below. These details are always available, without using AI credits.",
+        text: "Explore my published portfolio below. These details are always available without using AI credits.",
         sources: knowledge.map(({ id, title, href }) => ({ id, title, href })),
       },
     ]);
@@ -128,6 +169,31 @@ export default function PortfolioChat({ posts, live = false }) {
       setCopied(null);
     }
   }
+  function openArticle(article, event) {
+    previousFocus.current = event.currentTarget;
+    setSelectedArticle(article);
+  }
+  function closeArticle() {
+    setSelectedArticle(null);
+    previousFocus.current?.focus();
+  }
+  function keepFocusInArticle(event) {
+    if (event.key !== "Tab") return;
+    const focusable = [
+      ...articleModal.current.querySelectorAll(
+        'button, a[href], summary, [tabindex]:not([tabindex="-1"])',
+      ),
+    ].filter((element) => !element.hasAttribute("disabled"));
+    const first = focusable[0];
+    const last = focusable.at(-1);
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last?.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first?.focus();
+    }
+  }
 
   return (
     <div className="portfolio-app">
@@ -135,16 +201,26 @@ export default function PortfolioChat({ posts, live = false }) {
         <button
           className="wordmark"
           onClick={clear}
-          aria-label="kevthefoo — new conversation"
+          aria-label="KevTheFoo — new conversation"
         >
-          <span className="logo-mark">kf</span>kevthefoo
-          <span className="wordmark-dot">.</span>
+          <Image
+            className="brand-icon"
+            src="/icon.svg"
+            alt=""
+            width={34}
+            height={34}
+          />
+          KevTheFoo
         </button>
         <div className="header-actions">
-          <span className="mode-pill">
-            <i />
-            {live ? "Portfolio AI" : "Portfolio preview"}
-          </span>
+          <button
+            className="icon-button"
+            onClick={toggleTheme}
+            aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
+            title={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
+          >
+            {theme === "light" ? <LuMoon /> : <LuSun />}
+          </button>
           <button
             className="icon-button"
             onClick={clear}
@@ -166,7 +242,6 @@ export default function PortfolioChat({ posts, live = false }) {
                 alt="Kevin Foo"
                 priority
               />
-              <span>✳</span>
             </div>
             <p className="eyebrow">A LITTLE CODE. A LOT OF CURIOSITY.</p>
             <h1>
@@ -215,69 +290,141 @@ export default function PortfolioChat({ posts, live = false }) {
                 >
                   {message.text}
                 </div>
-                {message.sources?.length > 0 && (
-                  <div className="sources">
-                    {message.sources.map((source) => (
-                      <details key={source.id} className="source-detail">
-                        <summary>
-                          {source.title}
-                          <span>+</span>
+                {message.sources?.some((source) => source.id === "about") && (
+                  <div
+                    className="follow-up-actions"
+                    aria-label="Ask a follow-up"
+                  >
+                    {aboutFollowUps.map(([label, question, Icon]) => (
+                      <button
+                        key={label}
+                        type="button"
+                        onClick={() => send(question)}
+                        disabled={busy}
+                      >
+                        <Icon />
+                        {label}
+                      </button>
+                    ))}
+                  </div>
+                )}
+                {message.sources?.some((source) => source.id === "contact") && (
+                  <div className="inline-links contact-links">
+                    <a href="mailto:kevthefoo@gmail.com">
+                      Email Kevin
+                      <LuArrowUpRight />
+                    </a>
+                    <a
+                      href="https://github.com/kevthefoo"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      GitHub
+                      <LuArrowUpRight />
+                    </a>
+                    <a
+                      href="https://www.linkedin.com/in/kevthefoo/"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      LinkedIn
+                      <LuArrowUpRight />
+                    </a>
+                    <a
+                      href="https://x.com/kevthefoo"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      X
+                      <LuArrowUpRight />
+                    </a>
+                  </div>
+                )}
+                {careerPost &&
+                  message.sources?.some((source) => source.id === "career") && (
+                    <button
+                      type="button"
+                      className="related-article-button"
+                      onClick={(event) => openArticle(careerPost, event)}
+                    >
+                      <LuBookOpen />
+                      <span>
+                        <small>RELATED ARTICLE</small>
+                        {careerPost.title}
+                      </span>
+                      <LuArrowUpRight />
+                    </button>
+                  )}
+                {message.sources?.some(
+                  (source) => source.id === "projects",
+                ) && (
+                  <div className="project-rows">
+                    {projects.map((project, projectIndex) => (
+                      <details className="project-row" key={project.name}>
+                        <summary className="project-row-summary">
+                          <span className="project-index">
+                            {String(projectIndex + 1).padStart(2, "0")}
+                          </span>
+                          <span className="project-name">{project.name}</span>
+                          <span className="project-kind">{project.type}</span>
+                          <span className="project-toggle">+</span>
                         </summary>
-                        <div className="source-content">
-                          <p>
-                            {
-                              knowledge.find(
-                                (record) => record.id === source.id,
-                              )?.text
-                            }
-                          </p>
-                          {source.id === "projects" && (
-                            <div className="inline-links">
-                              {projects.map((project) => (
-                                <a
-                                  key={project.name}
-                                  href={project.url}
-                                  target="_blank"
-                                  rel="noreferrer"
-                                >
-                                  {project.name}
-                                  <LuArrowUpRight />
-                                </a>
-                              ))}
-                            </div>
-                          )}
-                          {source.id === "contact" && (
-                            <div className="inline-links">
-                              <a href="mailto:kevthefoo@gmail.com">
-                                Email Kevin
-                                <LuArrowUpRight />
-                              </a>
-                              <a
-                                href="https://github.com/kevthefoo"
-                                target="_blank"
-                                rel="noreferrer"
-                              >
-                                GitHub
-                                <LuArrowUpRight />
-                              </a>
-                              <a
-                                href="https://www.linkedin.com/in/kevthefoo/"
-                                target="_blank"
-                                rel="noreferrer"
-                              >
-                                LinkedIn
-                                <LuArrowUpRight />
-                              </a>
-                            </div>
-                          )}
-                          {["journal", "career"].includes(source.id) &&
-                            posts
-                              .filter(
-                                (post) =>
-                                  source.id === "journal" ||
-                                  post.slug === "how-i-start-my-career",
-                              )
-                              .map((post) => (
+                        <div className="project-preview">
+                          <div className="project-thumbnail">
+                            <Image
+                              src={project.image}
+                              alt={`${project.name} website preview`}
+                              sizes="(max-width: 760px) 100vw, 320px"
+                            />
+                          </div>
+                          <div className="project-copy">
+                            <small>{project.tag}</small>
+                            <h3>{project.name}</h3>
+                            <p>{project.description}</p>
+                            <a
+                              href={project.url}
+                              target="_blank"
+                              rel="noreferrer"
+                            >
+                              Visit website
+                              <LuArrowUpRight />
+                            </a>
+                          </div>
+                        </div>
+                      </details>
+                    ))}
+                  </div>
+                )}
+                {message.sources?.some((source) =>
+                  expandableSourceIds.has(source.id),
+                ) && (
+                  <div className="sources">
+                    {message.sources
+                      .filter((source) => expandableSourceIds.has(source.id))
+                      .map((source) => (
+                        <details key={source.id} className="source-detail">
+                          <summary>
+                            {source.title}
+                            <span>+</span>
+                          </summary>
+                          <div className="source-content">
+                            {source.id === "projects" && (
+                              <div className="inline-links">
+                                {projects.map((project) => (
+                                  <a
+                                    key={project.name}
+                                    href={project.url}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                  >
+                                    {project.name}
+                                    <LuArrowUpRight />
+                                  </a>
+                                ))}
+                              </div>
+                            )}
+                            {source.id === "journal" &&
+                              posts.map((post) => (
                                 <details
                                   className="inline-article"
                                   key={post.slug}
@@ -293,9 +440,9 @@ export default function PortfolioChat({ posts, live = false }) {
                                   </div>
                                 </details>
                               ))}
-                        </div>
-                      </details>
-                    ))}
+                          </div>
+                        </details>
+                      ))}
                   </div>
                 )}
                 {message.role === "assistant" && (
@@ -385,15 +532,52 @@ export default function PortfolioChat({ posts, live = false }) {
             </div>
           </div>
         </form>
-        <div className="composer-caption">
-          <span>
-            {live
-              ? "Only Kevin’s world. Answers grounded in his portfolio."
-              : "Published facts preview · Live AI is not connected"}
-          </span>
-          {remaining !== null && <span>{remaining} questions left today</span>}
-        </div>
+        {remaining !== null && (
+          <div className="composer-caption">
+            <span>{remaining} questions left today</span>
+          </div>
+        )}
       </footer>
+      {selectedArticle && (
+        <div
+          className="article-modal-backdrop"
+          onMouseDown={(event) => {
+            if (event.target === event.currentTarget) closeArticle();
+          }}
+        >
+          <section
+            ref={articleModal}
+            className="article-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="article-modal-title"
+            onKeyDown={keepFocusInArticle}
+          >
+            <header className="article-modal-header">
+              <div>
+                <span>KEVIN’S JOURNAL</span>
+                <h2 id="article-modal-title">{selectedArticle.title}</h2>
+                <p>
+                  {selectedArticle.date} · {selectedArticle.readTime}
+                </p>
+              </div>
+              <button
+                ref={closeArticleButton}
+                type="button"
+                className="article-modal-close"
+                aria-label="Close article"
+                title="Close article"
+                onClick={closeArticle}
+              >
+                <LuX />
+              </button>
+            </header>
+            <div className="article-modal-content article-body">
+              <ReactMarkdown>{selectedArticle.content}</ReactMarkdown>
+            </div>
+          </section>
+        </div>
+      )}
     </div>
   );
 }

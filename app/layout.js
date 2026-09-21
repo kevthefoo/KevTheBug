@@ -8,7 +8,14 @@ export const metadata = {
 };
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" data-theme="dark" suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{const saved=localStorage.getItem("kevthefoo-theme");const theme=saved==="light"||saved==="dark"?saved:window.matchMedia("(prefers-color-scheme: light)").matches?"light":"dark";document.documentElement.dataset.theme=theme}catch{document.documentElement.dataset.theme="dark"}`,
+          }}
+        />
+      </head>
       <body className={inter.variable}>
         <main id="main-content">{children}</main>
       </body>

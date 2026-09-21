@@ -1,6 +1,6 @@
 ---
 title: How I start my software engineer career
-date: '2025-01-15'
+date: "2025-01-15"
 excerpt: >-
   Started in 2021 during the NFT boom, self-taught Solidity and frontend, gained
   industry experience, then moved to Australia for a Master’s in IT.
@@ -10,6 +10,7 @@ readTime: 5 min read
 coverImage: null
 status: published
 ---
+
 ## The Beginning – Falling Into Blockchain (2021)
 
 I began this journey in 2021, during the peak of the blockchain boom.  
@@ -40,9 +41,10 @@ To launch an NFT project, writing smart contracts isn’t enough.
 You also need a website to introduce your project and integrate the smart contract so users can interact with it.
 
 So I began learning:
-- HTML  
-- CSS  
-- JavaScript  
+
+- HTML
+- CSS
+- JavaScript
 
 My early learning method? Extremely inefficient.
 
@@ -80,7 +82,7 @@ But he was incredibly patient and guided me step by step. I’m deeply grateful 
 
 After nearly two years of growth at the company, I made a life decision.
 
-I chose to resign and pursue a Master’s degree in IT in Australia.
+I chose to resign and pursue a Master’s degree in IT in Australia. I graduated in August 2026.
 
 And that’s roughly how my journey as a software engineer began.
 

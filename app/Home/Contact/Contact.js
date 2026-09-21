@@ -78,7 +78,7 @@ export default function Contact() {
                 <FaXTwitter className="text-2xl" />
               </div>
               <h3 className="mb-3 text-2xl font-bold text-gray-800 dark:text-white">
-                X
+                X (Twitter)
               </h3>
               <p className="mb-4 text-gray-600 dark:text-gray-300">
                 Follow me on X
