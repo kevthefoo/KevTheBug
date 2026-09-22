@@ -1,0 +1,15 @@
+# KevTheFoo Portfolio
+
+Kevin Foo is a software developer from Taiwan who builds for the web and explores blockchain and AI.
+
+## Public API
+
+The versioned, read-only JSON API is available at `/api/v1`.
+
+- Full public profile: `/api/v1/profile`
+- Published facts: `/api/v1/facts`
+- Projects: `/api/v1/projects`
+- Articles: `/api/v1/articles`
+- Reviewed questions and answers: `/api/v1/questions`
+
+All endpoints support cross-origin GET requests. Follow the links returned by `/api/v1` to discover the canonical endpoint URLs.
