@@ -39,6 +39,32 @@ const aboutFollowUps = [
   ["My projects", "Show me your projects", ["projects"], LuLayers],
   ["My journey", "Tell me about your career journey", ["career"], LuBookOpen],
 ];
+function TypewriterText({ text }) {
+  const [visibleLength, setVisibleLength] = useState(0);
+
+  useEffect(() => {
+    let nextLength = 0;
+    const charactersPerTick = Math.max(1, Math.ceil(text.length / 90));
+    const interval = window.setInterval(() => {
+      nextLength = Math.min(text.length, nextLength + charactersPerTick);
+      setVisibleLength(nextLength);
+      if (nextLength === text.length) window.clearInterval(interval);
+    }, 18);
+
+    return () => window.clearInterval(interval);
+  }, [text]);
+
+  const typing = visibleLength < text.length;
+  return (
+    <>
+      <span className="typewriter-text" aria-hidden="true">
+        {text.slice(0, visibleLength)}
+        {typing && <span className="typewriter-cursor" />}
+      </span>
+      <span className="sr-only">{text}</span>
+    </>
+  );
+}
 export default function PortfolioChat({ posts }) {
   const [messages, setMessages] = useState([]),
     [input, setInput] = useState(""),
@@ -315,7 +341,11 @@ export default function PortfolioChat({ posts }) {
                 <div
                   className={`message-text ${message.error ? "message-error" : ""}`}
                 >
-                  {message.text}
+                  {message.role === "assistant" ? (
+                    <TypewriterText text={message.text} />
+                  ) : (
+                    message.text
+                  )}
                 </div>
                 {message.sources?.some((source) => source.id === "about") && (
                   <div
