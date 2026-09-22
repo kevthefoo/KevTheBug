@@ -11,10 +11,10 @@ export default function BlogPostContent({ post }) {
         <LuArrowLeft /> Back to the journal
       </Link>
       <div className="journal-meta">
-        <span>
+        <time dateTime={post.date}>
           <LuCalendar />
           {post.date}
-        </span>
+        </time>
         {post.readTime && (
           <span>
             <LuClock />
@@ -23,6 +23,7 @@ export default function BlogPostContent({ post }) {
         )}
       </div>
       <h1>{post.title}</h1>
+      <p className="journal-article-excerpt">{post.excerpt}</p>
       <div className="post-tags">
         {post.tags.map((tag) => (
           <span key={tag}>{tag}</span>
