@@ -15,7 +15,7 @@ No live provider call was made during implementation: no API key or production R
 
 ## Cost and abuse controls
 
-- Fixed `gpt-4.1-mini-2025-04-14`, text only, no tools, no browser, no history, no client-selected model, 128 output tokens, no automatic retries, 15-second provider timeout, `store:false`.
+- Fixed `gpt-4.1-mini-2025-04-14`, text only, no tools, no browser, no history, no client-selected model, 400 output tokens, no automatic retries, 15-second provider timeout, `store:false`.
 - Request body <= 4 KiB, question <= 500 characters. Only a single published source ID may provide context for short follow-ups. Client system prompts/history are rejected.
 - The serialized provider request is limited to 14,000 UTF-8 bytes. At the checked standard model rates ($0.40/M input, $1.60/M output), even a conservative byte-to-token bound plus protocol allowance fits under the US$0.01 reservation. Review this assumption if model/pricing/limits change. Official reference: https://developers.openai.com/api/docs/models/gpt-4.1-mini
 - Before each call, one Redis Lua transaction checks AND increments all limits. Redis server time drives UTC windows. Defaults: 100 calls / US$1 reserved per UTC day, 1,000 calls / US$10 reserved for the lifetime of this budget namespace, 10 calls per visitor identity per UTC day, 10 seconds between calls, 10 global calls per minute. Attempts rejected before reservation do not consume model quota.
@@ -26,9 +26,9 @@ No live provider call was made during implementation: no API key or production R
 
 ## Grounding and scope
 
-`data/knowledge.mjs` is the curated public source of truth. It excludes unanswered interview questions, private details and unsupported claims from the older `aboutMe.json`. Update these published snippets as Kevin's experience changes. The dated career article is explicitly historical, not a claim about current employment or graduation.
+`data/knowledge.mjs` contains curated portfolio facts and `data/qa.mjs` contains reviewed question-and-answer material. Both files are server-controlled public sources. Keep private details and secrets out of them, and update them as Kevin's experience changes. The browser sends only a question and cannot provide or replace this grounding context.
 
-The free preview uses keyword retrieval and is intentionally less flexible than live AI. Obvious off-topic/injection requests are refused locally without an OpenAI request. For potentially related requests, the model selects up to three relevant fact IDs using structured output. The server validates those IDs against the retrieved facts and renders ONLY the prewritten source text and links. It never renders model-authored prose, URLs, HTML or instructions. This makes answers less free-form, while preventing invented facts and general-purpose answers even if classification is manipulated. Unpublished details return an explicit unknown response. Source links let visitors inspect the underlying material.
+The free preview uses keyword retrieval and is intentionally less flexible than live AI. Obvious off-topic/injection requests are refused locally without an OpenAI request. For related requests, the server retrieves a small relevant subset of Q&A entries and facts, then sends that context to the model. The model writes a natural first-person answer in its own words, grounded only in that material. Structured output includes source IDs; the server accepts only IDs from its selected context before returning source links. Unpublished details return an explicit unknown response.
 
 ## Validation
 

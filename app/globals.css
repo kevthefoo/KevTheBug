@@ -15,6 +15,15 @@ html[data-theme="light"] {
   --line: #d7ddd8;
   --accent: #2e7148;
 }
+html.theme-transitioning body,
+html.theme-transitioning body *,
+html.theme-transitioning body *::before,
+html.theme-transitioning body *::after {
+  transition-property:
+    background-color, border-color, color, box-shadow, fill, stroke, filter;
+  transition-duration: 280ms;
+  transition-timing-function: ease;
+}
 * {
   box-sizing: border-box;
 }

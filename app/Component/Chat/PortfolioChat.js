@@ -75,6 +75,7 @@ export default function PortfolioChat({ posts }) {
     [theme, setTheme] = useState("dark");
   const bottom = useRef(null),
     controller = useRef(null),
+    themeTimer = useRef(null),
     field = useRef(null),
     closeArticleButton = useRef(null),
     previousFocus = useRef(null),
@@ -85,7 +86,13 @@ export default function PortfolioChat({ posts }) {
   useEffect(() => {
     bottom.current?.scrollIntoView({ behavior: "smooth", block: "end" });
   }, [messages, busy]);
-  useEffect(() => () => controller.current?.abort(), []);
+  useEffect(
+    () => () => {
+      controller.current?.abort();
+      window.clearTimeout(themeTimer.current);
+    },
+    [],
+  );
   useEffect(() => {
     setTheme(document.documentElement.dataset.theme || "dark");
   }, []);
@@ -111,9 +118,17 @@ export default function PortfolioChat({ posts }) {
   }
   function toggleTheme() {
     const nextTheme = theme === "light" ? "dark" : "light";
-    document.documentElement.dataset.theme = nextTheme;
+    const root = document.documentElement;
+    window.clearTimeout(themeTimer.current);
+    root.classList.add("theme-transitioning");
+    void root.offsetWidth;
+    root.dataset.theme = nextTheme;
     localStorage.setItem("kevthefoo-theme", nextTheme);
     setTheme(nextTheme);
+    themeTimer.current = window.setTimeout(
+      () => root.classList.remove("theme-transitioning"),
+      320,
+    );
   }
   function browse() {
     setMessages((m) => [
