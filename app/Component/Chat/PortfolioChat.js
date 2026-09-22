@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 import {
   LuPlus,
@@ -17,6 +18,13 @@ import {
   LuHeart,
   LuMoon,
   LuSun,
+  LuPanelLeftClose,
+  LuPanelLeftOpen,
+  LuMessageSquare,
+  LuFileText,
+  LuDatabase,
+  LuGithub,
+  LuTrash2,
 } from "react-icons/lu";
 import portrait from "@/asset/materials/pfp/pfp_bright.png";
 import { knowledge } from "@/data/knowledge.mjs";
@@ -28,6 +36,9 @@ const prompts = [
   ["Get in touch", "How can I contact Kevin?", "contact", LuMail],
 ];
 const expandableSourceIds = new Set(["journal"]);
+const conversationsKey = "kevthefoo-conversations";
+const activeConversationKey = "kevthefoo-active-conversation";
+const maxStoredConversations = 20;
 const aboutFollowUps = [
   ["My interests", "What are your interests?", ["interests"], LuHeart],
   [
@@ -72,6 +83,10 @@ export default function PortfolioChat({ posts }) {
     [remaining, setRemaining] = useState(null),
     [copied, setCopied] = useState(null),
     [selectedArticle, setSelectedArticle] = useState(null),
+    [sidebarOpen, setSidebarOpen] = useState(false),
+    [sidebarCollapsed, setSidebarCollapsed] = useState(false),
+    [conversations, setConversations] = useState([]),
+    [activeConversationId, setActiveConversationId] = useState(null),
     [theme, setTheme] = useState("dark");
   const bottom = useRef(null),
     controller = useRef(null),
@@ -79,7 +94,8 @@ export default function PortfolioChat({ posts }) {
     field = useRef(null),
     closeArticleButton = useRef(null),
     previousFocus = useRef(null),
-    articleModal = useRef(null);
+    articleModal = useRef(null),
+    conversationsReady = useRef(false);
   const careerPost = posts.find(
     (post) => post.slug === "how-i-start-my-career",
   );
@@ -97,6 +113,60 @@ export default function PortfolioChat({ posts }) {
     setTheme(document.documentElement.dataset.theme || "dark");
   }, []);
   useEffect(() => {
+    try {
+      const stored = JSON.parse(localStorage.getItem(conversationsKey) || "[]");
+      const safeConversations = Array.isArray(stored)
+        ? stored.filter(
+            (conversation) =>
+              conversation &&
+              typeof conversation.id === "string" &&
+              Array.isArray(conversation.messages),
+          )
+        : [];
+      const storedActiveId = localStorage.getItem(activeConversationKey);
+      const activeConversation = safeConversations.find(
+        (conversation) => conversation.id === storedActiveId,
+      );
+      setConversations(safeConversations);
+      if (activeConversation) {
+        setActiveConversationId(activeConversation.id);
+        setMessages(activeConversation.messages);
+      }
+    } catch {
+      localStorage.removeItem(conversationsKey);
+      localStorage.removeItem(activeConversationKey);
+    } finally {
+      conversationsReady.current = true;
+    }
+  }, []);
+  useEffect(() => {
+    if (!conversationsReady.current || messages.length === 0) return;
+    const firstQuestion = messages.find(
+      (message) => message.role === "user",
+    )?.text;
+    if (!firstQuestion) return;
+    const id = activeConversationId || crypto.randomUUID();
+    const conversation = {
+      id,
+      title:
+        firstQuestion.length > 42
+          ? `${firstQuestion.slice(0, 42).trim()}…`
+          : firstQuestion,
+      messages,
+      updatedAt: new Date().toISOString(),
+    };
+    setActiveConversationId(id);
+    setConversations((current) => {
+      const next = [
+        conversation,
+        ...current.filter((item) => item.id !== id),
+      ].slice(0, maxStoredConversations);
+      localStorage.setItem(conversationsKey, JSON.stringify(next));
+      localStorage.setItem(activeConversationKey, id);
+      return next;
+    });
+  }, [messages, activeConversationId]);
+  useEffect(() => {
     if (!selectedArticle) return;
     closeArticleButton.current?.focus();
     const closeOnEscape = (event) => {
@@ -113,8 +183,28 @@ export default function PortfolioChat({ posts }) {
     controller.current = null;
     setBusy(false);
     setMessages([]);
+    setActiveConversationId(null);
+    localStorage.removeItem(activeConversationKey);
     setInput("");
+    setSidebarOpen(false);
     field.current?.focus();
+  }
+  function openConversation(conversation) {
+    controller.current?.abort();
+    controller.current = null;
+    setBusy(false);
+    setActiveConversationId(conversation.id);
+    setMessages(conversation.messages);
+    localStorage.setItem(activeConversationKey, conversation.id);
+    setSidebarOpen(false);
+  }
+  function deleteConversation(id) {
+    setConversations((current) => {
+      const next = current.filter((conversation) => conversation.id !== id);
+      localStorage.setItem(conversationsKey, JSON.stringify(next));
+      return next;
+    });
+    if (activeConversationId === id) clear();
   }
   function toggleTheme() {
     const nextTheme = theme === "light" ? "dark" : "light";
@@ -148,6 +238,7 @@ export default function PortfolioChat({ posts }) {
       .filter(Boolean);
     if (!sources.length) return;
     setInput("");
+    setSidebarOpen(false);
     setMessages((current) => [
       ...current,
       { role: "user", text: question },
@@ -262,356 +353,478 @@ export default function PortfolioChat({ posts }) {
 
   return (
     <div className="portfolio-app">
-      <header className="chat-header">
-        <button
-          className="wordmark"
-          onClick={clear}
-          aria-label="KevTheFoo — new conversation"
-        >
-          <Image
-            className="brand-icon"
-            src="/icon.svg"
-            alt=""
-            width={34}
-            height={34}
-          />
-          KevTheFoo
-        </button>
-        <div className="header-actions">
+      <aside
+        className={`chat-sidebar ${sidebarOpen ? "is-open" : ""} ${sidebarCollapsed ? "is-collapsed" : ""}`}
+        aria-label="Portfolio navigation"
+      >
+        <div className="sidebar-topbar">
           <button
-            className="icon-button"
-            onClick={toggleTheme}
-            aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
-            title={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
+            className="sidebar-brand"
+            onClick={clear}
+            aria-label="KevTheFoo — new conversation"
           >
-            {theme === "light" ? <LuMoon /> : <LuSun />}
+            <Image src="/icon.svg" alt="" width={32} height={32} />
+            <span>KevTheFoo</span>
           </button>
           <button
-            className="icon-button"
-            onClick={clear}
-            aria-label="New conversation"
-            title="New conversation"
+            className="sidebar-toggle"
+            type="button"
+            onClick={() => {
+              if (window.matchMedia("(max-width: 820px)").matches)
+                setSidebarOpen(false);
+              else setSidebarCollapsed(true);
+            }}
+            aria-label="Close sidebar"
+            title="Close sidebar"
           >
-            <LuPlus />
+            <LuPanelLeftClose />
           </button>
         </div>
-      </header>
-      <div className="content-scroll">
-        {messages.length === 0 ? (
-          <div className="welcome">
-            <div className="intro-avatar">
-              <Image
-                src={portrait}
-                width={64}
-                height={64}
-                alt="Kevin Foo"
-                priority
-              />
-            </div>
-            <p className="eyebrow">A LITTLE CODE. A LOT OF CURIOSITY.</p>
-            <h1>
-              Hey, I’m Kevin.
-              <br />
-              <span>What would you like to know?</span>
-            </h1>
-            <p className="welcome-description">
-              My work, my story, and the things I’m into.
-              <br />
-              One conversation is a good place to start.
-            </p>
-            <div className="prompt-grid">
-              {prompts.map(([label, question, sourceId, Icon]) => (
-                <button
-                  key={label}
-                  onClick={() => answerPreset(question, sourceId)}
+        <button className="sidebar-new-chat" type="button" onClick={clear}>
+          <LuMessageSquare />
+          <span>New conversation</span>
+          <LuPlus className="sidebar-new-chat-plus" />
+        </button>
+        <nav className="sidebar-navigation">
+          <p>Explore</p>
+          {prompts.map(([label, question, sourceId, Icon]) => (
+            <button
+              key={label}
+              type="button"
+              onClick={() => answerPreset(question, sourceId)}
+              className={
+                messages
+                  .at(-1)
+                  ?.sources?.some((source) => source.id === sourceId)
+                  ? "is-active"
+                  : ""
+              }
+            >
+              <Icon />
+              <span>{label}</span>
+            </button>
+          ))}
+          <p>Resources</p>
+          <Link href="/blog" onClick={() => setSidebarOpen(false)}>
+            <LuFileText />
+            <span>Journal</span>
+          </Link>
+          <Link href="/api/v1" onClick={() => setSidebarOpen(false)}>
+            <LuDatabase />
+            <span>Public API</span>
+          </Link>
+          <a
+            href="https://github.com/kevthefoo"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <LuGithub />
+            <span>GitHub</span>
+          </a>
+          {conversations.length > 0 && (
+            <div className="sidebar-recents">
+              <p>Recents</p>
+              {conversations.map((conversation) => (
+                <div
+                  className={`sidebar-recent-row ${activeConversationId === conversation.id ? "is-active" : ""}`}
+                  key={conversation.id}
                 >
-                  <Icon />
-                  {label}
-                  <LuArrowUpRight />
-                </button>
+                  <button
+                    className="sidebar-recent-open"
+                    type="button"
+                    onClick={() => openConversation(conversation)}
+                    title={conversation.title}
+                  >
+                    <LuMessageSquare />
+                    <span>{conversation.title}</span>
+                  </button>
+                  <button
+                    className="sidebar-recent-delete"
+                    type="button"
+                    onClick={() => deleteConversation(conversation.id)}
+                    aria-label={`Delete ${conversation.title}`}
+                    title="Delete conversation"
+                  >
+                    <LuTrash2 />
+                  </button>
+                </div>
               ))}
             </div>
+          )}
+        </nav>
+        <div className="sidebar-profile">
+          <Image src={portrait} alt="Kevin Foo" width={36} height={36} />
+          <span>
+            <strong>Kevin Foo</strong>
+            <small>Software developer</small>
+          </span>
+        </div>
+      </aside>
+      {sidebarOpen && (
+        <button
+          className="sidebar-backdrop"
+          type="button"
+          aria-label="Close sidebar"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+      <section className="chat-main">
+        <header className="chat-header">
+          <div className="chat-header-leading">
+            <button
+              className={`icon-button sidebar-open-button ${sidebarCollapsed ? "is-visible" : ""}`}
+              type="button"
+              onClick={() => {
+                setSidebarCollapsed(false);
+                setSidebarOpen(true);
+              }}
+              aria-label="Open sidebar"
+              title="Open sidebar"
+            >
+              <LuPanelLeftOpen />
+            </button>
+            <span className="chat-title">Ask Kevin</span>
           </div>
-        ) : (
-          <div
-            className="messages"
-            aria-live="polite"
-            aria-relevant="additions text"
-          >
-            {messages.map((message, index) => (
-              <div className={`message ${message.role}`} key={index}>
-                {message.role === "assistant" && (
-                  <div className="answer-label">
-                    <span className="assistant-symbol">✳</span>
-                    <strong>Kevin’s portfolio</strong>
-                    <small>
-                      {message.mode === "ai"
-                        ? "AI selected"
-                        : ["preview", "preset"].includes(message.mode)
-                          ? "Published facts"
-                          : ""}
-                    </small>
-                  </div>
-                )}
-                <div
-                  className={`message-text ${message.error ? "message-error" : ""}`}
-                >
-                  {message.role === "assistant" ? (
-                    <TypewriterText text={message.text} />
-                  ) : (
-                    message.text
-                  )}
-                </div>
-                {message.sources?.some((source) => source.id === "about") && (
-                  <div
-                    className="follow-up-actions"
-                    aria-label="Ask a follow-up"
+          <div className="header-actions">
+            <button
+              className="icon-button"
+              onClick={toggleTheme}
+              aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
+              title={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
+            >
+              {theme === "light" ? <LuMoon /> : <LuSun />}
+            </button>
+            <button
+              className="icon-button"
+              onClick={clear}
+              aria-label="New conversation"
+              title="New conversation"
+            >
+              <LuPlus />
+            </button>
+          </div>
+        </header>
+        <div className="content-scroll">
+          {messages.length === 0 ? (
+            <div className="welcome">
+              <div className="intro-avatar">
+                <Image
+                  src={portrait}
+                  width={64}
+                  height={64}
+                  alt="Kevin Foo"
+                  priority
+                />
+              </div>
+              <p className="eyebrow">A LITTLE CODE. A LOT OF CURIOSITY.</p>
+              <h1>
+                Hey, I’m Kevin.
+                <br />
+                <span>What would you like to know?</span>
+              </h1>
+              <p className="welcome-description">
+                My work, my story, and the things I’m into.
+                <br />
+                One conversation is a good place to start.
+              </p>
+              <div className="prompt-grid">
+                {prompts.map(([label, question, sourceId, Icon]) => (
+                  <button
+                    key={label}
+                    onClick={() => answerPreset(question, sourceId)}
                   >
-                    {aboutFollowUps.map(
-                      ([label, question, sourceIds, Icon]) => (
-                        <button
-                          key={label}
-                          type="button"
-                          onClick={() => answerPreset(question, sourceIds)}
-                          disabled={busy}
-                        >
-                          <Icon />
-                          {label}
-                        </button>
-                      ),
+                    <Icon />
+                    {label}
+                    <LuArrowUpRight />
+                  </button>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <div
+              className="messages"
+              aria-live="polite"
+              aria-relevant="additions text"
+            >
+              {messages.map((message, index) => (
+                <div className={`message ${message.role}`} key={index}>
+                  {message.role === "assistant" && (
+                    <div className="answer-label">
+                      <span className="assistant-symbol">✳</span>
+                      <strong>Kevin’s portfolio</strong>
+                      <small>
+                        {message.mode === "ai"
+                          ? "AI selected"
+                          : ["preview", "preset"].includes(message.mode)
+                            ? "Published facts"
+                            : ""}
+                      </small>
+                    </div>
+                  )}
+                  <div
+                    className={`message-text ${message.error ? "message-error" : ""}`}
+                  >
+                    {message.role === "assistant" ? (
+                      <TypewriterText text={message.text} />
+                    ) : (
+                      message.text
                     )}
                   </div>
-                )}
-                {message.sources?.some((source) => source.id === "contact") && (
-                  <div className="inline-links contact-links">
-                    <a href="mailto:kevthefoo@gmail.com">
-                      Email Kevin
-                      <LuArrowUpRight />
-                    </a>
-                    <a
-                      href="https://github.com/kevthefoo"
-                      target="_blank"
-                      rel="noreferrer"
+                  {message.sources?.some((source) => source.id === "about") && (
+                    <div
+                      className="follow-up-actions"
+                      aria-label="Ask a follow-up"
                     >
-                      GitHub
-                      <LuArrowUpRight />
-                    </a>
-                    <a
-                      href="https://www.linkedin.com/in/kevthefoo/"
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      LinkedIn
-                      <LuArrowUpRight />
-                    </a>
-                    <a
-                      href="https://x.com/kevthefoo"
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      X
-                      <LuArrowUpRight />
-                    </a>
-                  </div>
-                )}
-                {careerPost &&
-                  message.sources?.some((source) => source.id === "career") && (
-                    <button
-                      type="button"
-                      className="related-article-button"
-                      onClick={(event) => openArticle(careerPost, event)}
-                    >
-                      <LuBookOpen />
-                      <span>
-                        <small>RELATED ARTICLE</small>
-                        {careerPost.title}
-                      </span>
-                      <LuArrowUpRight />
-                    </button>
+                      {aboutFollowUps.map(
+                        ([label, question, sourceIds, Icon]) => (
+                          <button
+                            key={label}
+                            type="button"
+                            onClick={() => answerPreset(question, sourceIds)}
+                            disabled={busy}
+                          >
+                            <Icon />
+                            {label}
+                          </button>
+                        ),
+                      )}
+                    </div>
                   )}
-                {message.sources?.some(
-                  (source) => source.id === "projects",
-                ) && (
-                  <div className="project-rows">
-                    {projects.map((project, projectIndex) => (
-                      <details className="project-row" key={project.name}>
-                        <summary className="project-row-summary">
-                          <span className="project-index">
-                            {String(projectIndex + 1).padStart(2, "0")}
-                          </span>
-                          <span className="project-name">{project.name}</span>
-                          <span className="project-kind">{project.type}</span>
-                          <span className="project-toggle">+</span>
-                        </summary>
-                        <div className="project-preview">
-                          <div className="project-thumbnail">
-                            <Image
-                              src={project.image}
-                              alt={`${project.name} website preview`}
-                              sizes="(max-width: 760px) 100vw, 320px"
-                            />
-                          </div>
-                          <div className="project-copy">
-                            <small>{project.tag}</small>
-                            <h3>{project.name}</h3>
-                            <p>{project.description}</p>
-                            <a
-                              href={project.url}
-                              target="_blank"
-                              rel="noreferrer"
-                            >
-                              Visit website
-                              <LuArrowUpRight />
-                            </a>
-                          </div>
-                        </div>
-                      </details>
-                    ))}
-                  </div>
-                )}
-                {message.sources?.some((source) =>
-                  expandableSourceIds.has(source.id),
-                ) && (
-                  <div className="sources">
-                    {message.sources
-                      .filter((source) => expandableSourceIds.has(source.id))
-                      .map((source) => (
-                        <details key={source.id} className="source-detail">
-                          <summary>
-                            {source.title}
-                            <span>+</span>
+                  {message.sources?.some(
+                    (source) => source.id === "contact",
+                  ) && (
+                    <div className="inline-links contact-links">
+                      <a href="mailto:kevthefoo@gmail.com">
+                        Email Kevin
+                        <LuArrowUpRight />
+                      </a>
+                      <a
+                        href="https://github.com/kevthefoo"
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        GitHub
+                        <LuArrowUpRight />
+                      </a>
+                      <a
+                        href="https://www.linkedin.com/in/kevthefoo/"
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        LinkedIn
+                        <LuArrowUpRight />
+                      </a>
+                      <a
+                        href="https://x.com/kevthefoo"
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        X
+                        <LuArrowUpRight />
+                      </a>
+                    </div>
+                  )}
+                  {careerPost &&
+                    message.sources?.some(
+                      (source) => source.id === "career",
+                    ) && (
+                      <button
+                        type="button"
+                        className="related-article-button"
+                        onClick={(event) => openArticle(careerPost, event)}
+                      >
+                        <LuBookOpen />
+                        <span>
+                          <small>RELATED ARTICLE</small>
+                          {careerPost.title}
+                        </span>
+                        <LuArrowUpRight />
+                      </button>
+                    )}
+                  {message.sources?.some(
+                    (source) => source.id === "projects",
+                  ) && (
+                    <div className="project-rows">
+                      {projects.map((project, projectIndex) => (
+                        <details className="project-row" key={project.name}>
+                          <summary className="project-row-summary">
+                            <span className="project-index">
+                              {String(projectIndex + 1).padStart(2, "0")}
+                            </span>
+                            <span className="project-name">{project.name}</span>
+                            <span className="project-kind">{project.type}</span>
+                            <span className="project-toggle">+</span>
                           </summary>
-                          <div className="source-content">
-                            {source.id === "projects" && (
-                              <div className="inline-links">
-                                {projects.map((project) => (
-                                  <a
-                                    key={project.name}
-                                    href={project.url}
-                                    target="_blank"
-                                    rel="noreferrer"
-                                  >
-                                    {project.name}
-                                    <LuArrowUpRight />
-                                  </a>
-                                ))}
-                              </div>
-                            )}
-                            {source.id === "journal" &&
-                              posts.map((post) => (
-                                <details
-                                  className="inline-article"
-                                  key={post.slug}
-                                >
-                                  <summary>{post.title}</summary>
-                                  <small>
-                                    {post.date} · {post.readTime}
-                                  </small>
-                                  <div className="article-body">
-                                    <ReactMarkdown>
-                                      {post.content}
-                                    </ReactMarkdown>
-                                  </div>
-                                </details>
-                              ))}
+                          <div className="project-preview">
+                            <div className="project-thumbnail">
+                              <Image
+                                src={project.image}
+                                alt={`${project.name} website preview`}
+                                sizes="(max-width: 760px) 100vw, 320px"
+                              />
+                            </div>
+                            <div className="project-copy">
+                              <small>{project.tag}</small>
+                              <h3>{project.name}</h3>
+                              <p>{project.description}</p>
+                              <a
+                                href={project.url}
+                                target="_blank"
+                                rel="noreferrer"
+                              >
+                                Visit website
+                                <LuArrowUpRight />
+                              </a>
+                            </div>
                           </div>
                         </details>
                       ))}
-                  </div>
-                )}
-                {message.role === "assistant" && (
+                    </div>
+                  )}
+                  {message.sources?.some((source) =>
+                    expandableSourceIds.has(source.id),
+                  ) && (
+                    <div className="sources">
+                      {message.sources
+                        .filter((source) => expandableSourceIds.has(source.id))
+                        .map((source) => (
+                          <details key={source.id} className="source-detail">
+                            <summary>
+                              {source.title}
+                              <span>+</span>
+                            </summary>
+                            <div className="source-content">
+                              {source.id === "projects" && (
+                                <div className="inline-links">
+                                  {projects.map((project) => (
+                                    <a
+                                      key={project.name}
+                                      href={project.url}
+                                      target="_blank"
+                                      rel="noreferrer"
+                                    >
+                                      {project.name}
+                                      <LuArrowUpRight />
+                                    </a>
+                                  ))}
+                                </div>
+                              )}
+                              {source.id === "journal" &&
+                                posts.map((post) => (
+                                  <details
+                                    className="inline-article"
+                                    key={post.slug}
+                                  >
+                                    <summary>{post.title}</summary>
+                                    <small>
+                                      {post.date} · {post.readTime}
+                                    </small>
+                                    <div className="article-body">
+                                      <ReactMarkdown>
+                                        {post.content}
+                                      </ReactMarkdown>
+                                    </div>
+                                  </details>
+                                ))}
+                            </div>
+                          </details>
+                        ))}
+                    </div>
+                  )}
+                  {message.role === "assistant" && (
+                    <button
+                      className="copy-button"
+                      aria-label={
+                        copied === index ? "Answer copied" : "Copy answer"
+                      }
+                      onClick={() => copy(message.text, index)}
+                    >
+                      {copied === index ? <LuCheck /> : <LuCopy />}
+                    </button>
+                  )}
+                </div>
+              ))}
+              {busy && (
+                <div className="answer-pending" role="status">
+                  <span className="assistant-symbol">✳</span>Finding the
+                  relevant details<span className="loading-dots">...</span>
+                </div>
+              )}
+              <div ref={bottom} />
+            </div>
+          )}
+        </div>
+        <footer className="composer-area">
+          <form
+            className="composer"
+            onSubmit={(e) => {
+              e.preventDefault();
+              send();
+            }}
+          >
+            <label className="sr-only" htmlFor="question">
+              Ask about Kevin
+            </label>
+            <textarea
+              id="question"
+              ref={field}
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              maxLength={500}
+              rows={2}
+              placeholder="Ask me about Kevin…"
+              onKeyDown={(e) => {
+                if (
+                  e.key === "Enter" &&
+                  !e.shiftKey &&
+                  !e.nativeEvent.isComposing
+                ) {
+                  e.preventDefault();
+                  send();
+                }
+              }}
+            />
+            <div className="composer-bottom">
+              <button
+                type="button"
+                className="browse-button"
+                onClick={browse}
+                disabled={busy}
+              >
+                <LuLayers />
+                Explore the facts
+              </button>
+              <div>
+                {input.length > 400 && <small>{input.length}/500</small>}
+                {busy ? (
                   <button
-                    className="copy-button"
-                    aria-label={
-                      copied === index ? "Answer copied" : "Copy answer"
-                    }
-                    onClick={() => copy(message.text, index)}
+                    type="button"
+                    className="send-button"
+                    aria-label="Stop response"
+                    onClick={stop}
                   >
-                    {copied === index ? <LuCheck /> : <LuCopy />}
+                    <span className="stop-square" />
+                  </button>
+                ) : (
+                  <button
+                    className="send-button"
+                    type="submit"
+                    aria-label="Send question"
+                    disabled={!input.trim()}
+                  >
+                    <LuArrowUp />
                   </button>
                 )}
               </div>
-            ))}
-            {busy && (
-              <div className="answer-pending" role="status">
-                <span className="assistant-symbol">✳</span>Finding the relevant
-                details<span className="loading-dots">...</span>
-              </div>
-            )}
-            <div ref={bottom} />
-          </div>
-        )}
-      </div>
-      <footer className="composer-area">
-        <form
-          className="composer"
-          onSubmit={(e) => {
-            e.preventDefault();
-            send();
-          }}
-        >
-          <label className="sr-only" htmlFor="question">
-            Ask about Kevin
-          </label>
-          <textarea
-            id="question"
-            ref={field}
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            maxLength={500}
-            rows={2}
-            placeholder="Ask me about Kevin…"
-            onKeyDown={(e) => {
-              if (
-                e.key === "Enter" &&
-                !e.shiftKey &&
-                !e.nativeEvent.isComposing
-              ) {
-                e.preventDefault();
-                send();
-              }
-            }}
-          />
-          <div className="composer-bottom">
-            <button
-              type="button"
-              className="browse-button"
-              onClick={browse}
-              disabled={busy}
-            >
-              <LuLayers />
-              Explore the facts
-            </button>
-            <div>
-              {input.length > 400 && <small>{input.length}/500</small>}
-              {busy ? (
-                <button
-                  type="button"
-                  className="send-button"
-                  aria-label="Stop response"
-                  onClick={stop}
-                >
-                  <span className="stop-square" />
-                </button>
-              ) : (
-                <button
-                  className="send-button"
-                  type="submit"
-                  aria-label="Send question"
-                  disabled={!input.trim()}
-                >
-                  <LuArrowUp />
-                </button>
-              )}
             </div>
-          </div>
-        </form>
-        {remaining !== null && (
-          <div className="composer-caption">
-            <span>{remaining} questions left today</span>
-          </div>
-        )}
-      </footer>
+          </form>
+          {remaining !== null && (
+            <div className="composer-caption">
+              <span>{remaining} questions left today</span>
+            </div>
+          )}
+        </footer>
+      </section>
       {selectedArticle && (
         <div
           className="article-modal-backdrop"
