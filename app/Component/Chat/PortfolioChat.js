@@ -409,7 +409,7 @@ export default function PortfolioChat({ posts }) {
             <LuFileText />
             <span>Journal</span>
           </Link>
-          <Link href="/api/v1" onClick={() => setSidebarOpen(false)}>
+          <Link href="/api/docs" onClick={() => setSidebarOpen(false)}>
             <LuDatabase />
             <span>Public API</span>
           </Link>

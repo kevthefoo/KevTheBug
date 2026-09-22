@@ -16,6 +16,12 @@ export default function sitemap() {
       changeFrequency: "monthly",
       priority: 0.8,
     },
+    {
+      url: absoluteUrl("/api/docs"),
+      lastModified: new Date("2026-09-22"),
+      changeFrequency: "monthly",
+      priority: 0.6,
+    },
     ...posts.map((post) => ({
       url: absoluteUrl(`/blog/${post.slug}`),
       lastModified: new Date(post.date),
