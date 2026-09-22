@@ -22,17 +22,22 @@ import portrait from "@/asset/materials/pfp/pfp_bright.png";
 import { knowledge } from "@/data/knowledge.mjs";
 import { projects } from "@/data/projects";
 const prompts = [
-  ["About me", "Tell me about Kevin", LuUser],
-  ["My projects", "Show me Kevin’s projects", LuLayers],
-  ["My journey", "How did Kevin start his career?", LuCode],
-  ["Get in touch", "How can I contact Kevin?", LuMail],
+  ["About me", "Tell me about Kevin", "about", LuUser],
+  ["My projects", "Show me Kevin’s projects", "projects", LuLayers],
+  ["My journey", "How did Kevin start his career?", "career", LuCode],
+  ["Get in touch", "How can I contact Kevin?", "contact", LuMail],
 ];
 const expandableSourceIds = new Set(["journal"]);
 const aboutFollowUps = [
-  ["My interests", "What are your interests?", LuHeart],
-  ["My skills", "What skills do you use?", LuCode],
-  ["My projects", "Show me your projects", LuLayers],
-  ["My journey", "Tell me about your career journey", LuBookOpen],
+  ["My interests", "What are your interests?", ["interests"], LuHeart],
+  [
+    "My skills",
+    "What skills do you use?",
+    ["frontend", "backend", "blockchain"],
+    LuCode,
+  ],
+  ["My projects", "Show me your projects", ["projects"], LuLayers],
+  ["My journey", "Tell me about your career journey", ["career"], LuBookOpen],
 ];
 export default function PortfolioChat({ posts }) {
   const [messages, setMessages] = useState([]),
@@ -91,6 +96,25 @@ export default function PortfolioChat({ posts }) {
         role: "assistant",
         text: "Explore my published portfolio below. These details are always available without using AI credits.",
         sources: knowledge.map(({ id, title, href }) => ({ id, title, href })),
+      },
+    ]);
+  }
+  function answerPreset(question, sourceIds) {
+    if (busy) return;
+    const requestedIds = Array.isArray(sourceIds) ? sourceIds : [sourceIds];
+    const sources = requestedIds
+      .map((sourceId) => knowledge.find((record) => record.id === sourceId))
+      .filter(Boolean);
+    if (!sources.length) return;
+    setInput("");
+    setMessages((current) => [
+      ...current,
+      { role: "user", text: question },
+      {
+        role: "assistant",
+        text: sources.map((source) => source.text).join("\n\n"),
+        sources: sources.map(({ id, title, href }) => ({ id, title, href })),
+        mode: "preset",
       },
     ]);
   }
@@ -255,8 +279,11 @@ export default function PortfolioChat({ posts }) {
               One conversation is a good place to start.
             </p>
             <div className="prompt-grid">
-              {prompts.map(([label, question, Icon]) => (
-                <button key={label} onClick={() => send(question)}>
+              {prompts.map(([label, question, sourceId, Icon]) => (
+                <button
+                  key={label}
+                  onClick={() => answerPreset(question, sourceId)}
+                >
                   <Icon />
                   {label}
                   <LuArrowUpRight />
@@ -279,7 +306,7 @@ export default function PortfolioChat({ posts }) {
                     <small>
                       {message.mode === "ai"
                         ? "AI selected"
-                        : message.mode === "preview"
+                        : ["preview", "preset"].includes(message.mode)
                           ? "Published facts"
                           : ""}
                     </small>
@@ -295,17 +322,19 @@ export default function PortfolioChat({ posts }) {
                     className="follow-up-actions"
                     aria-label="Ask a follow-up"
                   >
-                    {aboutFollowUps.map(([label, question, Icon]) => (
-                      <button
-                        key={label}
-                        type="button"
-                        onClick={() => send(question)}
-                        disabled={busy}
-                      >
-                        <Icon />
-                        {label}
-                      </button>
-                    ))}
+                    {aboutFollowUps.map(
+                      ([label, question, sourceIds, Icon]) => (
+                        <button
+                          key={label}
+                          type="button"
+                          onClick={() => answerPreset(question, sourceIds)}
+                          disabled={busy}
+                        >
+                          <Icon />
+                          {label}
+                        </button>
+                      ),
+                    )}
                   </div>
                 )}
                 {message.sources?.some((source) => source.id === "contact") && (

@@ -97,6 +97,7 @@ svg {
   width: 34px;
   height: 34px;
   margin-right: 12px;
+  filter: invert(1);
 }
 .header-actions {
   display: flex;
@@ -740,6 +741,9 @@ summary::-webkit-details-marker {
 }
 html[data-theme="light"] body {
   background: #f4f5f2;
+}
+html[data-theme="light"] .brand-icon {
+  filter: none;
 }
 html[data-theme="light"] .icon-button {
   color: #4f5b53;
