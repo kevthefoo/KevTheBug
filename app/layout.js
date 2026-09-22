@@ -85,9 +85,9 @@ export const metadata = {
     title: SITE_NAME,
     statusBarStyle: "black-translucent",
   },
-  verification: process.env.GOOGLE_SITE_VERIFICATION
-    ? { google: process.env.GOOGLE_SITE_VERIFICATION }
-    : undefined,
+  verification: {
+    google: "baTjMVsN_Gg8wzKrCK7g4A2NB9Y78K0zTImPn8PvDnI",
+  },
 };
 
 export const viewport = {
